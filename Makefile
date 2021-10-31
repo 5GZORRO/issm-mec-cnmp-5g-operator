@@ -29,7 +29,7 @@ BUNDLE_METADATA_OPTS ?= $(BUNDLE_CHANNELS) $(BUNDLE_DEFAULT_CHANNEL)
 #
 # For example, running 'make bundle-build bundle-push catalog-build catalog-push' will build and push both
 # ibm.com/5goperator-bundle:$VERSION and ibm.com/5goperator-catalog:$VERSION.
-IMAGE_TAG_BASE ?= artifactory.haifa.ibm.com:5130/weit/5goperator
+IMAGE_TAG_BASE ?= 84.88.32.158:5000/weit/5goperator
 IMAGE_TAG_BASE_LOCAL ?= localhost:5000/5goperator
 
 # BUNDLE_IMG defines the image:tag used for the bundle.
