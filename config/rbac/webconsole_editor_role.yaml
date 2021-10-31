@@ -1,0 +1,24 @@
+# permissions for end users to edit webconsoles.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: webconsole-editor-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - webconsoles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - webconsoles/status
+  verbs:
+  - get

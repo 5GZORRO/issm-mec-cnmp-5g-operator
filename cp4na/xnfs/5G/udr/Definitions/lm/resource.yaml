@@ -1,0 +1,28 @@
+name: resource::udr::1.0
+description: descriptor for udr
+properties:
+  ip_address:
+    readonly: true
+  podname:
+    readonly: true
+  nrf_ip_address:
+    description: nrf instance ip address
+  nrf_port:
+    default: 8000
+  mongo_ip_address:
+    description: mongo db ip address
+    default: mongodb
+  registry_ip:
+    default: localhost
+  registry_port:
+    default: 5000
+lifecycle:
+  Create: {}
+  Start: {}
+  Stop: {}
+  Delete: {}
+default-driver:
+  kubernetes:
+    selector:
+      infrastructure-type:
+      - 'Kubernetes'

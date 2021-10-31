@@ -1,0 +1,22 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Nssf
+metadata:
+  name: nssf-sample
+spec:
+  config:
+    podSettings:
+      resources:
+        requests:
+          memory: "200Mi"
+          cpu: "0.2"
+        limits:
+          memory: "200Mi"
+          cpu: "0.2"
+    image: artifactory.haifa.ibm.com:5130/weit/free5gc-nssf
+    image_init: artifactory.haifa.ibm.com:5130/weit/5ginitcontainer
+    # TODO: nssf_name assumed same value as name
+    nssf_name: nssf-sample
+    nrf_ip_address: "nrf-sample-sbi"
+    nrf_port: "8000"
+    mnc: "93"
+    mcc: "208"

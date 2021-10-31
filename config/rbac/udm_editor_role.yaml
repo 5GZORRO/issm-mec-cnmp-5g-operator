@@ -1,0 +1,24 @@
+# permissions for end users to edit udms.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: udm-editor-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udms
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udms/status
+  verbs:
+  - get

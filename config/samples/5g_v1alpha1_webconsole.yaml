@@ -1,0 +1,18 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Webconsole
+metadata:
+  name: webconsole-sample
+spec:
+  config:
+    podSettings:
+      resources:
+        requests:
+          memory: "200Mi"
+          cpu: "0.2"
+        limits:
+          memory: "200Mi"
+          cpu: "0.2"
+    image: artifactory.haifa.ibm.com:5130/weit/free5gc-webui
+    image_init: artifactory.haifa.ibm.com:5130/weit/5ginitcontainer
+    # TODO: define node_port here
+    mongo_ip_address: "mongo-sample-sbi"

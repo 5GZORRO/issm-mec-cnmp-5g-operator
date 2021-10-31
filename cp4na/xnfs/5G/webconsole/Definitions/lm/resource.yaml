@@ -1,0 +1,25 @@
+description: descriptor for webconsole
+properties:
+  ip_address:
+    readonly: true
+  podname:
+    readonly: true
+  registry_ip:
+    description: ip address of the registry
+    default: localhost
+  registry_port:
+    description: registry port
+    default: 5000
+  mongo_ip_address:
+    description: ip address of mondo db instance
+    default: mongodb
+lifecycle:
+  Create: {}
+  Start: {}
+  Stop: {}
+  Delete: {}
+default-driver:
+  kubernetes:
+    selector:
+      infrastructure-type:
+      - 'Kubernetes'

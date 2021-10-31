@@ -1,0 +1,17 @@
+# Associate this UPF with slice 1/010203
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Transition
+metadata:
+  name: smf-addnode-upf1
+spec:
+  config:
+    resourceType: "smfs.v1alpha1.5g.ibm.com"
+    resourceNamespace: 5g-core
+    resourceName: smf-sample
+    transition: AttachNode
+    properties:
+      nodeId: upf1-sample
+      nodeName: upf1-sample
+      nodeType: UPF
+      sd: "010203"
+      sst: "1"

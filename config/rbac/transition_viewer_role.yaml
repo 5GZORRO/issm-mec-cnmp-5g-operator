@@ -1,0 +1,20 @@
+# permissions for end users to view transitions.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: transition-viewer-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - transitions
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - transitions/status
+  verbs:
+  - get

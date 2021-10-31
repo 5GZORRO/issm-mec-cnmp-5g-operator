@@ -1,0 +1,15 @@
+info:
+  version: 1.0.0
+  description: UPF configuration
+
+configuration:
+  # debugLevel: panic|fatal|error|warn|info|debug|trace
+  debugLevel: info
+
+  pfcp:
+    - addr: 10.100.200.10
+
+  gtpu:
+    - addr: 10.100.200.10
+
+

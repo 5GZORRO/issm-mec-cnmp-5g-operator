@@ -1,0 +1,13 @@
+---
+- name: Start
+  hosts: mongo
+  gather_facts: False
+
+  tasks:
+    # - shell: "ps aux"
+    #   register: mongod_status
+
+    - name: start mongod
+      raw: "nohup mongod --port 27017 --bind_ip 0.0.0.0 < /dev/null > /mongo.log 2>&1 & sleep 1"
+      # when: mongod_status.stdout.find('mongod') == -1
+

@@ -1,0 +1,6 @@
+schema: '2.0'
+name: subscriber
+version: '1.0'
+packaging: tgz
+type: Resource
+resource-manager: lm

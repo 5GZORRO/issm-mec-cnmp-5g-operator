@@ -1,0 +1,17 @@
+description: descriptor for adding a subscriber
+properties:
+  webconsole_ip_address:
+    required: True
+  plmnID:
+    default: 20893
+  IMSI:
+    default: 208930000000003
+  dnn:
+    default: internet
+lifecycle:
+  Start: {}
+default-driver:
+  kubernetes:
+    selector:
+      infrastructure-type:
+      - 'Kubernetes'

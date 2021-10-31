@@ -1,0 +1,37 @@
+name: resource::nrf::1.0
+description: descriptor for nrf
+properties:
+  ip_address: 
+    description: pod ip address
+    readonly: true
+  x1:
+    readonly: true
+  mcc:
+    description: country code
+    required: true
+  mnc:
+    description: network code
+    required: true
+  podname:
+    readonly: true
+  port:
+    default: 8000
+  mongo_ip_address:
+    description: ip address of mondo db instance
+    default: mongodb
+  registry_ip:
+    description: ip address of the registry
+    default: localhost
+  registry_port:
+    description: registry port
+    default: 5000
+lifecycle:
+  Create: {}
+  Start: {}
+  Stop: {}
+  Delete: {}
+default-driver:
+  kubernetes:
+    selector:
+      infrastructure-type:
+      - 'Kubernetes'

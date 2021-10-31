@@ -1,0 +1,36 @@
+compose:
+  - name: Create
+    deploy:
+      - objects:
+          file: smf.yaml
+    checkReady:
+      script: check-ready-on-create.py
+    getOutputs: outputs-on-create.py
+  - name: Start
+    deploy:
+      - objects:
+          file: smf_start.yaml
+        immediateCleanupOn: Always
+    checkReady:
+      script: check-ready-on-start.py
+  - name: Stop
+    deploy:
+      - objects:
+          file: smf_stop.yaml
+        immediateCleanupOn: Always
+    checkReady:
+      script: check-ready-on-stop.py
+  - name: AttachNode
+    deploy:
+      - objects:
+          file: attachnode.yaml
+        immediateCleanupOn: Always
+    checkReady:
+      script: check-ready-on-attachnode.py
+  - name: AddUERoute
+    deploy:
+      - objects:
+          file: addueroute.yaml
+        immediateCleanupOn: Always
+    checkReady:
+      script: check-ready-on-addueroute.py

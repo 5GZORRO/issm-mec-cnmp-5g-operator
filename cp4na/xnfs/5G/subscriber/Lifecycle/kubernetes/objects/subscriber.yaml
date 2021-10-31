@@ -1,0 +1,10 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Subscriber
+metadata:
+  name: {{ system_properties.resourceSubdomain }}  
+spec:
+  config:
+    webconsole_ip_address: "{{ webconsole_ip_address }}"
+    plmnID: "{{ plmnID }}"
+    IMSI: "{{ IMSI }}"
+    dnn: "{{ dnn }}"

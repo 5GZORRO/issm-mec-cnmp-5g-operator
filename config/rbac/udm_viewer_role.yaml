@@ -1,0 +1,20 @@
+# permissions for end users to view udms.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: udm-viewer-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udms
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udms/status
+  verbs:
+  - get

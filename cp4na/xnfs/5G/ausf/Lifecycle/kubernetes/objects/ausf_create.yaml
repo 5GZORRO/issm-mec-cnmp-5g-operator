@@ -1,0 +1,18 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Transition
+metadata:
+  name: "{{ system_properties.resourceSubdomain }}-create"
+spec:
+  config:
+    resourceType: "ausfs.v1alpha1.5g.ibm.com"
+    resourceNamespace: "{{ deployment_location.properties.defaultObjectNamespace }}"
+    resourceName: "{{ system_properties.resourceSubdomain }}"
+    transition: "Create"
+    properties:
+      requests_memory: "400Mi"
+      requests_cpu: "0.2"
+      limits_memory: "400Mi"
+      limits_cpu: "0.2"
+      image: "{{ registry_ip }}:{{ registry_port }}/nf_ausf:latest"
+      nrf_ip_address: "{{ nrf_ip_address }}"
+      nrf_port: "{{ nrf_port }}"

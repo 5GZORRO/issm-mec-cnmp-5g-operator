@@ -1,0 +1,20 @@
+# permissions for end users to view n3iwfs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: n3iwf-viewer-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - n3iwfs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - n3iwfs/status
+  verbs:
+  - get

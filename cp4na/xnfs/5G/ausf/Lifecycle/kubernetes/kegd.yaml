@@ -1,0 +1,22 @@
+compose:
+  - name: Create
+    deploy:
+      - objects:
+          file: ausf.yaml
+    checkReady:
+      script: check-ready-on-create.py
+    getOutputs: outputs-on-create.py 
+  - name: Start
+    deploy:
+      - objects:
+          file: ausf_start.yaml
+        immediateCleanupOn: Always
+    checkReady:
+      script: check-ready-on-start.py
+  - name: Stop
+    deploy:
+      - objects:
+          file: ausf_stop.yaml
+        immediateCleanupOn: Always
+    checkReady:
+      script: check-ready-on-stop.py

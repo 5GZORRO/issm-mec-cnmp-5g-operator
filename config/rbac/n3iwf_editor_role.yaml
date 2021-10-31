@@ -1,0 +1,24 @@
+# permissions for end users to edit n3iwfs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: n3iwf-editor-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - n3iwfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - n3iwfs/status
+  verbs:
+  - get

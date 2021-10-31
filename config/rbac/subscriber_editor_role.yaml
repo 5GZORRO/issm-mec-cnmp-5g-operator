@@ -1,0 +1,24 @@
+# permissions for end users to edit subscribers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: subscriber-editor-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - subscribers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - subscribers/status
+  verbs:
+  - get

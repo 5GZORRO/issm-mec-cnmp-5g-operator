@@ -1,0 +1,14 @@
+# Add link from gNB to this upf
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Transition
+metadata:
+  name: smf-sample-upf-sample-addlink
+spec:
+  config:
+    resourceType: "smfs.v1alpha1.5g.ibm.com"
+    resourceNamespace: 5g-core
+    resourceName: smf-sample
+    transition: AddLink
+    properties:
+      nodeId: gNB
+      connectedTo: upf2-sample

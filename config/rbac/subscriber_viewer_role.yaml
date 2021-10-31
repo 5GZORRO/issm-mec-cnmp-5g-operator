@@ -1,0 +1,20 @@
+# permissions for end users to view subscribers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: subscriber-viewer-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - subscribers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - subscribers/status
+  verbs:
+  - get

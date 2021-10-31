@@ -1,0 +1,36 @@
+name: resource::nssf::1.0
+description: descriptor for nssf
+properties:
+  mcc:
+    description: country code
+    required: true
+  mnc:
+    description: network code
+    required: true
+  ip_address:
+    readonly: true
+  podname:
+    readonly: true
+  nrf_ip_address:
+    description: ip address of the nrf instance
+    required: true
+  nrf_port:
+    description: port for nrf instance
+    default: "8000"
+  registry_ip:
+    description: ip address of the registry
+    default: localhost
+  registry_port:
+    description: registry port
+    default: 5000
+
+lifecycle:
+  Create: {}
+  Start: {}
+  Stop: {}
+  Delete: {}
+default-driver:
+  kubernetes:
+    selector:
+      infrastructure-type:
+      - 'Kubernetes'

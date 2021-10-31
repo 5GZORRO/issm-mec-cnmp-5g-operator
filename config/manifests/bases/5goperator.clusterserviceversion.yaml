@@ -1,0 +1,49 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: 5goperator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: Amf is the Schema for the amfs API
+      displayName: Amf
+      kind: Amf
+      name: amfs.5g.ibm.com
+      specDescriptors:
+      - description: 'INSERT ADDITIONAL SPEC FIELDS - desired state of cluster Important: Run "make" to regenerate code after modifying this file IPAddress string `json:"ip_address,omitempty"`'
+        displayName: Config
+        path: config
+      version: v1alpha1
+  description: 5GOperator
+  displayName: 5GOperator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - IBM
+  - 5G
+  links:
+  - name: 5goperator
+    url: https://5goperator.domain
+  maturity: alpha
+  provider:
+    name: IBM
+  version: 0.0.0

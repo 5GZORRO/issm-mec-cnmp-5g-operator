@@ -1,0 +1,23 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: gilan
+spec:
+  config: '{
+            "cniVersion": "0.3.1",
+            "name": "gilan",
+            "type": "macvlan",
+            "master": "ens192",
+            "ipam": {
+              "type": "whereabouts",
+              "datastore": "kubernetes",
+              "kubernetes": { "kubeconfig": "/etc/cni/net.d/whereabouts.d/whereabouts.kubeconfig" },
+              "range": "10.20.0.0/24",
+              "range_start": "10.20.0.2",
+              "range_end": "10.20.0.50",
+              "log_file" : "/tmp/whereabouts.log",
+              "log_level" : "debug"
+            },
+            "gateway": "",
+            "mtu": 1450
+        }'

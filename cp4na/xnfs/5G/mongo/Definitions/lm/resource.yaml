@@ -1,0 +1,27 @@
+name: resource::mongo::1.0
+description: descriptor for mongo db
+properties:
+  ip_address:
+    description: k8s ip address
+    readonly: true
+    default: mongo
+  x1:
+    readonly: true
+  podname:
+    readonly: true    
+  registry_ip:
+    description: ip address of the registry
+    default: localhost
+  registry_port:
+    description: registry port
+    default: 5000
+lifecycle:
+  Create: {}
+  Start: {}
+  Stop: {}
+  Delete: {}
+default-driver:
+  kubernetes:
+    selector:
+      infrastructure-type:
+      - 'Kubernetes'

@@ -1,0 +1,22 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Nrf
+metadata:
+  name: nrf-sample
+spec:
+  config:
+    podSettings:
+      resources:
+        requests:
+          memory: "200Mi"
+          cpu: "0.2"
+        limits:
+          memory: "200Mi"
+          cpu: "0.2"
+    image: artifactory.haifa.ibm.com:5130/weit/free5gc-nrf
+    image_init: artifactory.haifa.ibm.com:5130/weit/5ginitcontainer
+    # TODO: nrf_name assumed same value as name
+    nrf_name: nrf-sample
+    mnc: "93"
+    mcc: "208"
+    mongo_ip_address: "mongo-sample-sbi"
+    port: "8000"

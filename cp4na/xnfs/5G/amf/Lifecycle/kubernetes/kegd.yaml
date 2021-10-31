@@ -1,0 +1,27 @@
+compose:
+  - name: Create
+    deploy:
+      - objects:
+          file: amf.yaml
+    checkReady:
+      script: check-ready-on-create.py
+    getOutputs: outputs-on-create.py 
+  - name: Start
+    deploy:
+      - objects:
+          file: amf_start.yaml
+        immediateCleanupOn: Always
+    checkReady:
+      script: check-ready-on-start.py
+#  - name: Start
+#    runScript:
+#      script: run_start.py
+#    checkReady:
+#      script: check-ready-on-start1.py
+  - name: Stop
+    deploy:
+      - objects:
+          file: amf_stop.yaml
+        immediateCleanupOn: Always
+    checkReady:
+      script: check-ready-on-stop.py

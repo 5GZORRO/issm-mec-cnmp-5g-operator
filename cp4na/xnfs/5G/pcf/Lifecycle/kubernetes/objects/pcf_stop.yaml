@@ -1,0 +1,10 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Transition
+metadata:
+  name: "{{ system_properties.resourceSubdomain }}-stop"
+spec:
+  config:
+    resourceType: "pcfs.v1alpha1.5g.ibm.com"
+    resourceNamespace: "{{ deployment_location.properties.defaultObjectNamespace }}"
+    resourceName: "{{ system_properties.resourceSubdomain }}"
+    transition: "Stop"

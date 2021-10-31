@@ -1,0 +1,388 @@
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - amfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - amfs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - amfs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - ausfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - ausfs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - ausfs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - mongoes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - mongoes/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - mongoes/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - n3iwfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - n3iwfs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - n3iwfs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - nrves
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - nrves/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - nrves/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - nssfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - nssfs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - nssfs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - pcfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - pcfs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - pcfs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - smfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - smfs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - smfs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - transitions
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - transitions/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - transitions/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udms
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udms/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udms/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udrs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udrs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - udrs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - upfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - upfs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - upfs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - webconsoles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - webconsoles/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - webconsoles/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - pods/exec
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch

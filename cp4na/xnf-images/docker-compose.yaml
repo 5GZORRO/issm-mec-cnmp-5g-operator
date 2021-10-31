@@ -1,0 +1,373 @@
+version: '3.8'
+
+services:
+
+  demo-web-server1:
+    container_name: webtest1
+    image: nginxdemos/hello
+    expose:
+      - "8000"
+    cap_add:
+      - NET_ADMIN
+    networks: 
+      ginet:
+        ipv4_address: 172.168.14.10
+
+  demo-web-server2:
+    container_name: webtest2
+    image: nginxdemos/hello
+    expose:
+      - "8000"
+    cap_add:
+      - NET_ADMIN
+    networks: 
+      ginet:
+        ipv4_address: 172.168.14.11
+
+  free5gc-upf-b:
+    privileged: true
+    container_name: upfb
+    build:
+      context: ./nf_upf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./free5gc-upfd -f ../config/upfcfg.yaml
+    volumes:
+      - ./config/upfcfgb.yaml:/free5gc/config/upfcfg.yaml
+    cap_add:
+      - NET_ADMIN
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.10
+        aliases:
+          - upfb.free5gc.org
+
+  free5gc-upf-1:
+    privileged: true
+    container_name: upf1
+    build:
+      context: ./nf_upf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./free5gc-upfd -f ../config/upfcfg.yaml
+    volumes:
+      - ./config/upfcfg1.yaml:/free5gc/config/upfcfg.yaml
+    cap_add:
+      - NET_ADMIN
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.11
+        aliases:
+          - upf1.free5gc.org
+      ginet:
+        ipv4_address: 172.168.14.21
+
+  free5gc-upf-2:
+    privileged: true
+    container_name: upf2
+    build:
+      context: ./nf_upf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./free5gc-upfd -f ../config/upfcfg.yaml
+    volumes:
+      - ./config/upfcfg2.yaml:/free5gc/config/upfcfg.yaml
+    cap_add:
+      - NET_ADMIN
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.12
+        aliases:
+          - upf2.free5gc.org
+      ginet:
+        ipv4_address: 172.168.14.22
+
+  db:
+    container_name: mongodb
+    image: mongo
+    command: mongod --port 27017
+    expose:
+      - "27017"
+    volumes:
+      - dbdata:/data/db
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.20
+        aliases:
+          - db
+
+  free5gc-nrf:
+    container_name: nrf
+    build:
+      context: ./nf_nrf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./nrf -nrfcfg ../config/nrfcfg.yaml
+    expose:
+      - "8000"
+    volumes:
+      - ./config/nrfcfg.yaml:/free5gc/config/nrfcfg.yaml
+    environment:
+      DB_URI: mongodb://db/free5gc
+      GIN_MODE: release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.21
+        aliases:
+          - nrf.free5gc.org
+    depends_on:
+      - db
+
+  free5gc-amf:
+    container_name: amf
+    build:
+      context: ./nf_amf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./amf -amfcfg ../config/amfcfg.yaml
+    expose:
+      - "8000"
+    volumes:
+      - ./config/amfcfg.yaml:/free5gc/config/amfcfg.yaml
+    environment:
+      GIN_MODE: release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.22
+        aliases:
+          - amf.free5gc.org
+    depends_on:
+      - free5gc-nrf
+
+  free5gc-ausf:
+    container_name: ausf
+    build:
+      context: ./nf_ausf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./ausf -ausfcfg ../config/ausfcfg.yaml
+    expose:
+      - "8000"
+    volumes:
+      - ./config/ausfcfg.yaml:/free5gc/config/ausfcfg.yaml
+    environment:
+      GIN_MODE: release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.23
+        aliases:
+          - ausf.free5gc.org
+    depends_on:
+      - free5gc-nrf
+
+  free5gc-nssf:
+    container_name: nssf
+    build:
+      context: ./nf_nssf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./nssf -nssfcfg ../config/nssfcfg.yaml
+    expose:
+      - "8000"
+    volumes:
+      - ./config/nssfcfg.yaml:/free5gc/config/nssfcfg.yaml
+    environment:
+      GIN_MODE: release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.24
+        aliases:
+          - nssf.free5gc.org
+    depends_on:
+      - free5gc-nrf
+
+  free5gc-pcf:
+    container_name: pcf
+    build:
+      context: ./nf_pcf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./pcf -pcfcfg ../config/pcfcfg.yaml
+    expose:
+      - "8000"
+    volumes:
+      - ./config/pcfcfg.yaml:/free5gc/config/pcfcfg.yaml
+    environment:
+      GIN_MODE: release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.25
+        aliases:
+          - pcf.free5gc.org
+    depends_on:
+      - free5gc-nrf
+
+  free5gc-smf:
+    container_name: smf
+    build:
+      context: ./nf_smf
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./smf -smfcfg ../config/smfcfg.yaml -uerouting ../config/uerouting.yaml
+    expose:
+      - "8000"
+    volumes:
+      - ./config/smfcfg.yaml:/free5gc/config/smfcfg.yaml
+      - ./config/uerouting.yaml:/free5gc/config/uerouting.yaml
+    environment:
+      GIN_MODE: release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.26
+        aliases:
+          - smf.free5gc.org
+    depends_on:
+      - free5gc-nrf
+      - free5gc-upf-1
+      - free5gc-upf-2
+      - free5gc-upf-b
+
+  free5gc-udm:
+    container_name: udm
+    build:
+      context: ./nf_udm
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./udm -udmcfg ../config/udmcfg.yaml
+    expose:
+      - "8000"
+    volumes:
+      - ./config/udmcfg.yaml:/free5gc/config/udmcfg.yaml
+    environment:
+      GIN_MODE: release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.27
+        aliases:
+          - udm.free5gc.org
+    depends_on:
+      - db
+      - free5gc-nrf
+
+  free5gc-udr:
+    container_name: udr
+    build:
+      context: ./nf_udr
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./udr -udrcfg ../config/udrcfg.yaml
+    expose:
+      - "8000"
+    volumes:
+      - ./config/udrcfg.yaml:/free5gc/config/udrcfg.yaml
+    environment:
+      DB_URI: mongodb://db/free5gc
+      GIN_MODE: release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.28
+        aliases:
+          - udr.free5gc.org
+    depends_on:
+      - db
+      - free5gc-nrf
+
+  free5gc-n3iwf:
+    container_name: n3iwf
+    build:
+      context: ./nf_n3iwf
+      args:
+        DEBUG_TOOLS: "false"
+    command: sh -c "./n3iwf-ipsec.sh && ./n3iwf -n3iwfcfg ../config/n3iwfcfg.yaml"
+    volumes:
+      - ./config/n3iwfcfg.yaml:/free5gc/config/n3iwfcfg.yaml
+      - ./config/n3iwf-ipsec.sh:/free5gc/n3iwf/n3iwf-ipsec.sh
+    environment:
+      GIN_MODE: release
+    cap_add:
+      - NET_ADMIN
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.29
+        aliases:
+          - n3iwf.free5gc.org
+    depends_on:
+      - free5gc-amf
+      - free5gc-smf
+      - free5gc-upf-1
+      - free5gc-upf-2
+      - free5gc-upf-b
+
+  free5gc-webui:
+    container_name: webui
+    build:
+      context: ./webui
+      args:
+        DEBUG_TOOLS: "false"
+    command: ./webconsole
+    volumes:
+      - ./config/webuicfg.yaml:/free5gc/config/webuicfg.yaml
+    environment:
+      - GIN_MODE=release
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.30
+        aliases:
+          - webui
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  gnb-gw1:
+    privileged: true
+    container_name: gnb-gw1
+    build:
+      context: ./gnb-gw
+    command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 300 ; done"]
+    cap_add:
+      - NET_ADMIN
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.100
+        aliases:
+          - gnb-gw1.free5gc.org
+      publicnet:
+        ipv4_address: 192.168.100.10
+
+  gnb-gw2:
+    privileged: true
+    container_name: gnb-gw2
+    build:
+      context: ./gnb-gw
+    command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 300 ; done"]
+    cap_add:
+      - NET_ADMIN
+    networks:
+      privnet:
+        ipv4_address: 10.100.200.101
+        aliases:
+          - gnb-gw2.free5gc.org
+      publicnet:
+        ipv4_address: 192.168.100.11
+
+
+networks:
+  publicnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.100.0/24
+  privnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.100.200.0/24
+  ginet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.168.14.0/24
+
+volumes:
+  dbdata:

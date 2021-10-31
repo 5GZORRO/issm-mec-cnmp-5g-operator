@@ -1,0 +1,5 @@
+schema: '2.0'
+name: Core
+version: '1.0'
+packaging: tgz
+type: Assembly

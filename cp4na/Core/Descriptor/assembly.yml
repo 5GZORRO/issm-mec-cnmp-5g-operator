@@ -1,0 +1,282 @@
+name: assembly::Core::1.0
+description: descriptor for 5g Core
+properties:
+  mcc:
+    type: string
+    default: '208'
+  mnc:
+    type: string
+    default: '93'
+  deploymentLocation:
+    type: string
+    default: 5g
+composition:
+  mongodb:
+    properties:
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+    type: resource::mongo::1.0
+  webconsole:
+    properties:
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+      mongo_ip_address:
+        value: ${mongodb.ip_address}
+    type: resource::webconsole::1.0
+  nrf:
+    properties:
+      mcc:
+        value: ${mcc}
+      mnc:
+        value: ${mnc}
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+      mongo_ip_address:
+        value: ${mongodb.ip_address}
+    type: resource::nrf::1.0
+  nssf:
+    properties:
+      mcc:
+        value: ${mcc}
+      mnc:
+        value: ${mnc}
+      nrf_ip_address:
+        value: ${nrf.ip_address}
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+    type: resource::nssf::1.0
+  ausf:
+    properties:
+      nrf_ip_address:
+        value: ${nrf.ip_address}
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+    type: resource::ausf::1.0
+  udr:
+    properties:
+      nrf_ip_address:
+        value: ${nrf.ip_address}
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+      mongo_ip_address:
+        value: ${mongodb.ip_address}
+    type: resource::udr::1.0
+  udm:
+    properties:
+      nrf_ip_address:
+        value: ${nrf.ip_address}
+      udr_ip_address:
+        value: ${udr.ip_address}
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+    type: resource::udm::1.0
+  pcf:
+    properties:
+      nrf_ip_address:
+        value: ${nrf.ip_address}
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+      mongo_ip_address:
+        value: ${mongodb.ip_address}
+    type: resource::pcf::1.0
+  amf:
+    properties:
+      nrf_ip_address:
+        value: ${nrf.ip_address}
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+      mcc:
+        value: ${mcc}
+      mnc:
+        value: ${mnc}
+    type: resource::amf::1.0
+  smf:
+    properties:
+      nrf_ip_address:
+        value: ${nrf.ip_address}
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+    type: resource::smf::1.0
+  upfb:
+    properties:
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+    type: resource::upf::1.0
+  upf1:
+    properties:
+      dnn_name:
+        value: internet
+      apn_cidr:
+        value: 60.60.0.0/24
+      deploymentLocation:
+        value: ${deploymentLocation}
+      resourceManager:
+        value: brent
+    type: resource::upf::1.0
+relationships:
+  mongodbup:
+    properties: {}
+    lifecycle: {}
+    source-state: Active
+    source-state-modifier: post
+    target-state: Active
+    target-state-modifier: pre
+    source-capabilities:
+    - mongodb.capability
+    target-requirements:
+    - webconsole.requirement
+    - nrf.requirement
+  nrfup:
+    properties: {}
+    lifecycle: {}
+    source-state: Active
+    source-state-modifier: post
+    target-state: Active
+    target-state-modifier: pre
+    source-capabilities:
+    - nrf.capability
+    target-requirements:
+    - nssf.requirement
+    - ausf.requirement
+    - udr.requirement
+    - udm.requirement
+    - pcf.requirement
+    - amf.requirement
+    - smf.requirement
+  upfbup:
+    properties:
+      nodeId:
+        value: ${upfb.ip_address}
+      nodeName:
+        value: BranchingUPF
+      nodeType:
+        value: UPF
+      connectedTo:
+        value: AnchorUPF1
+    lifecycle:
+      Create:
+      - target.AttachNode
+      Cease:
+      - target.DetachNode
+    source-state: Active
+    source-state-modifier: post
+    target-state: Inactive
+    target-state-modifier: pre
+    source-capabilities:
+    - upfb.capability
+    target-requirements:
+    - smf.requirement
+  upf1up:
+    properties:
+      nodeId:
+        value: ${upf1.ip_address}
+      nodeName:
+        value: AnchorUPF1
+      nodeType:
+        value: UPF
+    lifecycle:
+      Create:
+      - target.AttachNode
+      Cease:
+      - target.DetachNode
+    source-state: Active
+    source-state-modifier: post
+    target-state: Inactive
+    target-state-modifier: pre
+    source-capabilities:
+    - upf1.capability
+    target-requirements:
+    - smf.requirement
+operations:
+  AddUERoute:
+    source-operation: smf.AddUERoute
+  AttachNode:
+    source-operation: smf.AttachNode
+designerLayout:
+  description: >-
+    The following information is solely used to determine the presentation of
+    this Assembly Design in the LM UI. It does not form part of
+    operational/behavioural description of the Assembly and should not be edited
+    directly.
+  elements:
+    gilannetwork:
+      x: 1232.666748046875
+      y: 844.0000381469727
+    sbinetwork:
+      x: 1050.0001220703125
+      y: 846.6666564941406
+    ngapnetwork:
+      x: 443.3333740234375
+      y: 836.0000610351562
+    pfcpnetwork:
+      x: 872.6666870117188
+      y: 840.0000610351562
+    upnetwork:
+      x: 652.6666870117188
+      y: 841.3332824707031
+    mongodb:
+      x: 1572.666748046875
+      y: 377.3333740234375
+    webconsole:
+      x: 1575.3333740234375
+      y: 556.0000305175781
+    nrf:
+      x: 1203.3333129882812
+      y: 257.33331298828125
+    nssf:
+      x: 755.3333740234375
+      y: 62.66667175292969
+    ausf:
+      x: 983.333251953125
+      y: 62.66667938232422
+    udr:
+      x: 1428.666748046875
+      y: 66.66664123535156
+    udm:
+      x: 1598
+      y: 70.66668701171875
+    pcf:
+      x: 1207.33349609375
+      y: 70.66667175292969
+    amf:
+      x: 851.3333740234375
+      y: 314.6666564941406
+    smf:
+      x: 1210
+      y: 524.0000305175781
+    upfb:
+      x: 859.3333740234375
+      y: 634.6666259765625
+    upf1:
+      x: 858.0000610351562
+      y: 474.6666259765625
+    assembly::Core::1.0:
+      x: 242.66665649414062
+      y: 17.33332061767578
+  canvas:
+    translate:
+      x: -51.191665267944245
+      y: -4
+    scale: 0.75

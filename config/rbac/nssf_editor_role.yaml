@@ -1,0 +1,24 @@
+# permissions for end users to edit nssfs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nssf-editor-role
+rules:
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - nssfs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - 5g.ibm.com
+  resources:
+  - nssfs/status
+  verbs:
+  - get

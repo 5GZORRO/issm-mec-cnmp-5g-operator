@@ -1,0 +1,23 @@
+name: resource::udm::1.0
+description: descriptor for udm
+properties:
+  ip_address:
+    readonly: true
+  podname:
+    readonly: true
+  nrf_ip_address:
+    description: ip address of nrf instance
+  registry_ip:
+    default: localhost
+  registry_port:
+    default: 5000
+lifecycle:
+  Create: {}
+  Start: {}
+  Stop: {}
+  Delete: {}
+default-driver:
+  kubernetes:
+    selector:
+      infrastructure-type:
+      - 'Kubernetes'

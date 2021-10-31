@@ -1,0 +1,14 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Smf
+metadata:
+  name: smf-sample
+spec:
+  config:
+    image: artifactory.haifa.ibm.com:5130/weit/free5gc-smf
+    image_init: artifactory.haifa.ibm.com:5130/weit/5ginitcontainer
+    smf_name: smf-sample
+    nrf_ip_address: "nrf-sample-sbi"
+    nrf_port: "8000"
+    up_nodes:
+    - name: gNB
+      type: AN

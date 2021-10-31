@@ -1,0 +1,27 @@
+name: resource::upf::1.0
+description: descriptor for upf
+properties:
+  ip_address:
+    readonly: true
+  dnn_name:
+    description: Name of the data network name
+  apn_cidr:
+    description: cidr of the apn
+  podname:
+    readonly: true
+  registry_ip:
+    description: ip address of the registry
+    default: localhost
+  registry_port:
+    description: registry port
+    default: 5000    
+lifecycle:
+  Create: {}
+  Start: {}
+  Stop: {}
+  Delete: {}
+default-driver:
+  kubernetes:
+    selector:
+      infrastructure-type:
+      - 'Kubernetes'
