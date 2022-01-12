@@ -9,8 +9,9 @@ import (
 
 func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 	container := upfContainer(cr)
+	licenseSidecarContainer := licensingContainer(cr, false)
 	init_container := upfInitContainer(cr)
-
+	licenseInitContainer := licensingContainer(cr, true)
 	var anotations = map[string]string{}
 	if cr.Spec.Config.DataNetworkName != "" {
 		// TODO: write this better
@@ -33,9 +34,11 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 		Spec: corev1.PodSpec{
 			Containers: []corev1.Container{
 				*container,
+				*licenseSidecarContainer,
 			},
 			InitContainers: []corev1.Container{
 				*init_container,
+				*licenseInitContainer,
 			},
 			DNSPolicy:       "ClusterFirst",
 			RestartPolicy:   "Always",
@@ -64,6 +67,9 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 						},
 					},
 				},
+			},
+			ImagePullSecrets: []corev1.LocalObjectReference{
+				{Name: "elmaregsecret"},
 			},
 		},
 	}
@@ -130,4 +136,50 @@ func upfContainer(cr *fivegv1alpha1.Upf) *corev1.Container {
 			},
 		},
 	}
+}
+
+func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Container {
+
+	container := &corev1.Container{
+		Name:            "elma_init_container",
+		Image:           "ghcr.io/5gzorro/elicensing-manager-agent/elma_sidecar:gitlab-ci", //TODO: Get from argo if possible?
+		ImagePullPolicy: corev1.PullAlways,
+		Env: []corev1.EnvVar{
+			{
+				Name: "INSTANCE_ID",
+				ValueFrom: &corev1.EnvVarSource{
+					FieldRef: &corev1.ObjectFieldSelector{
+						FieldPath: "metadata.uid",
+					},
+				},
+			},
+			{
+				Name: "DESCRIPTOR_ID",
+				ValueFrom: &corev1.EnvVarSource{
+					FieldRef: &corev1.ObjectFieldSelector{
+						FieldPath: "metadata.name",
+					},
+				},
+			},
+			{
+				Name:  "ELMA_IP",
+				Value: "http://192.168.137.118:31880", // TODO: Get from argo if possible?
+			},
+			{
+				Name:  "PRODUCT_OFFERING",
+				Value: "id-po-upf-k8s", // TODO: Get from argo if possible?
+			},
+		},
+		Command: []string{"/bin/bash", "-c", "/bin/bash init_hook.sh"},
+	}
+	if !isInitContainer {
+		container.Lifecycle.PreStop = &corev1.Handler{
+			Exec: &corev1.ExecAction{
+				Command: []string{"/bin/bash", "-c", "curl -X POST 'http://localhost:8000/SendEndHook'"},
+			},
+		}
+		container.Name = "elma_sidecar_container"
+		container.Command = []string{"/bin/bash", "-c", "/bin/bash start.sh"}
+	}
+	return container
 }
