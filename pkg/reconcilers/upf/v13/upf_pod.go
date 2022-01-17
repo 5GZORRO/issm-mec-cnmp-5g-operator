@@ -142,7 +142,7 @@ func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Con
 
 	container := &corev1.Container{
 		Name:            "elma_init_container",
-		Image:           "ghcr.io/5gzorro/elicensing-manager-agent/elma_sidecar:gitlab-ci", //TODO: Get from argo if possible?
+		Image:           cr.Spec.Config.Elicensing.Image,
 		ImagePullPolicy: corev1.PullAlways,
 		Env: []corev1.EnvVar{
 			{
@@ -163,11 +163,11 @@ func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Con
 			},
 			{
 				Name:  "ELMA_IP",
-				Value: "http://192.168.137.118:31880", // TODO: Get from argo if possible?
+				Value: cr.Spec.Config.Elicensing.ElmaIp,
 			},
 			{
 				Name:  "PRODUCT_OFFERING",
-				Value: "id-po-upf-k8s", // TODO: Get from argo if possible?
+				Value: cr.Spec.Config.Elicensing.ProductOfferingId,
 			},
 		},
 		Command: []string{"/bin/bash", "-c", "/bin/bash init_hook.sh"},
