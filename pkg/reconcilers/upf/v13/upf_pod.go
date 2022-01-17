@@ -141,7 +141,7 @@ func upfContainer(cr *fivegv1alpha1.Upf) *corev1.Container {
 func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Container {
 
 	container := &corev1.Container{
-		Name:            "elma_init_container",
+		Name:            "elma-init-container",
 		Image:           cr.Spec.Config.Elicensing.Image,
 		ImagePullPolicy: corev1.PullAlways,
 		Env: []corev1.EnvVar{
@@ -173,12 +173,14 @@ func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Con
 		Command: []string{"/bin/bash", "-c", "/bin/bash init_hook.sh"},
 	}
 	if !isInitContainer {
-		container.Lifecycle.PreStop = &corev1.Handler{
-			Exec: &corev1.ExecAction{
-				Command: []string{"/bin/bash", "-c", "curl -X POST 'http://localhost:8000/SendEndHook'"},
+		container.Lifecycle = &corev1.Lifecycle{
+			PreStop: &corev1.Handler{
+				Exec: &corev1.ExecAction{
+					Command: []string{"/bin/bash", "-c", "curl -X POST 'http://localhost:8000/SendEndHook'"},
+				},
 			},
 		}
-		container.Name = "elma_sidecar_container"
+		container.Name = "elma-sidecar-container"
 		container.Command = []string{"/bin/bash", "-c", "/bin/bash start.sh"}
 	}
 	return container
