@@ -47,6 +47,7 @@ type Elicensing struct {
 	ElmaIp				string	`json:"elma_ip,omitempty"`
 	Image				string	`json:"image,omitempty"`		
 	ProductOfferingId	string	`json:"product_offering_id,omitempty"`
+	IsActive			bool	`json:"is_active,"`
 }
 
 // UpfInternal config settings derived from other services

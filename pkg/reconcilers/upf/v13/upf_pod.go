@@ -9,9 +9,8 @@ import (
 
 func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 	container := upfContainer(cr)
-	licenseSidecarContainer := licensingContainer(cr, false)
 	init_container := upfInitContainer(cr)
-	licenseInitContainer := licensingContainer(cr, true)
+
 	var anotations = map[string]string{}
 	if cr.Spec.Config.DataNetworkName != "" {
 		// TODO: write this better
@@ -22,7 +21,7 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 		anotations = map[string]string{
 			"k8s.v1.cni.cncf.io/networks": fmt.Sprintf("[{\"name\" : \"sbi\"}, {\"name\" : \"up\"}]"),}
 	}
-	return &corev1.Pod{
+	pod := corev1.Pod{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      cr.Name,
 			Namespace: cr.Namespace,
@@ -34,11 +33,9 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 		Spec: corev1.PodSpec{
 			Containers: []corev1.Container{
 				*container,
-				*licenseSidecarContainer,
 			},
 			InitContainers: []corev1.Container{
 				*init_container,
-				*licenseInitContainer,
 			},
 			DNSPolicy:       "ClusterFirst",
 			RestartPolicy:   "Always",
@@ -68,11 +65,16 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 					},
 				},
 			},
-			ImagePullSecrets: []corev1.LocalObjectReference{
-				{Name: "elmaregsecret"},
-			},
 		},
 	}
+	
+	if cr.Spec.Config.Elicensing.IsActive{
+		licenseSidecarContainer := licensingContainer(cr, false)
+		licenseInitContainer := licensingContainer(cr, true)
+		pod.Spec.Containers = append(pod.Spec.Containers, *licenseSidecarContainer)
+		pod.Spec.InitContainers = append(pod.Spec.InitContainers, *licenseInitContainer)
+	}
+	return &pod
 }
 
 func upfInitContainer(cr *fivegv1alpha1.Upf) *corev1.Container {
@@ -170,7 +172,7 @@ func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Con
 				Value: cr.Spec.Config.Elicensing.ProductOfferingId,
 			},
 		},
-		Command: []string{"/bin/bash", "-c", "/bin/bash init_hook.sh"},
+		Command: []string{"/bin/bash", "-c", "/bin/bash inithook.sh"},
 	}
 	if !isInitContainer {
 		container.Lifecycle = &corev1.Lifecycle{
