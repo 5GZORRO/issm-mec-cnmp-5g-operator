@@ -1,0 +1,19 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Upf
+metadata:
+  name: upf1-sample
+spec:
+  config:
+    image: 84.88.32.158:5000/weit/free5gc-upf-tools
+    image_init: 84.88.32.158:5000/weit/5ginitcontainer
+    upf_name: upf1-sample
+    elicensing:
+      image: "84.88.32.158:5000/elicensing-manager-agent/elma_sidecar:gitlab-ci"
+      elma_ip: "http://http://172.28.3.42:31880"
+      product_offering_id: "id-po-upf-k8s"
+      is_active: true
+    dnns:
+    - dnn_name: internet
+      apn_cidr: "60.60.0.0/16"
+    - dnn_name: internet
+      apn_cidr: "10.10.0.0/16"
