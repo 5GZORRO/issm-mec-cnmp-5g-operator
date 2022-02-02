@@ -9,7 +9,7 @@ spec:
     upf_name: upf1-sample
     elicensing:
       image: "84.88.32.158:5000/elicensing-manager-agent/elma_sidecar:gitlab-ci"
-      elma_ip: "http://http://172.28.3.42:31880"
+      elma_ip: "http://172.28.3.42:31880"
       product_offering_id: "id-po-upf-k8s"
       is_active: true
     dnns:
