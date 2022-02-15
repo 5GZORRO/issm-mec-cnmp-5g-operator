@@ -157,11 +157,7 @@ func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Con
 			},
 			{
 				Name: "DESCRIPTOR_ID",
-				ValueFrom: &corev1.EnvVarSource{
-					FieldRef: &corev1.ObjectFieldSelector{
-						FieldPath: "metadata.name",
-					},
-				},
+				Value: cr.Spec.Config.Elicensing.DescriptorId,
 			},
 			{
 				Name:  "ELMA_IP",
