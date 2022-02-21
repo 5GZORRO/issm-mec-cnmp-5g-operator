@@ -174,7 +174,7 @@ func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Con
 		container.Lifecycle = &corev1.Lifecycle{
 			PreStop: &corev1.Handler{
 				Exec: &corev1.ExecAction{
-					Command: []string{"/bin/bash", "-c", "curl -X POST 'http://localhost:8000/SendEndHook'"},
+					Command: []string{"/bin/bash", "-c", "curl 'http://localhost:8000/SendEndHook'"},
 				},
 			},
 		}
