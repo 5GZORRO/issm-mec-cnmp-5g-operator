@@ -10,7 +10,8 @@ spec:
     resourceName: smf-sample
     transition: AttachNode
     properties:
-      nodeId: upf1-sample
+      nodeIdSbi: upf1-sample-sbi
+      nodeIdUp: upf1-sample-up
       nodeName: upf1-sample
       nodeType: UPF
       sd: "010203"
