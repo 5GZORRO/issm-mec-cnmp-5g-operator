@@ -62,11 +62,9 @@ configuration:
               sd: {{ .Sd }} # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
             dnnUpfInfoList: # DNN information list for this S-NSSAI
               - dnn: internet
-{{- if .Pools}}
+{{- if .Pool }}
                 pools:
-{{- range .Pools}}
-                  - cidr: {{ . }}
-{{- end}}
+                  - cidr: {{ .Pool }}
 {{- end}}
         interfaces: # Interface list for this UPF
           - interfaceType: N3 # the type of the interface (N3 or N9)

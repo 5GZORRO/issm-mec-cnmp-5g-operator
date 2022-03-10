@@ -33,7 +33,7 @@ type UpNode struct {
 	NodeIdSbi string `json:"node_id_sbi,omitempty"`
 	Sst    string `json:"sst,omitempty"`
 	Sd     string `json:"sd,omitempty"`
-	Pools  []string `json:"pools,omitempty"`
+	Pool   string `json:"pool,omitempty"`
 }
 
 type Link struct {
