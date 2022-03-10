@@ -42,6 +42,9 @@ configuration:
         - dnn: internet # Data Network Name
           dns: # the IP address of DNS
             ipv4: 8.8.8.8
+  plmnList:
+    - mcc: "208"
+      mnc: "93"
   pfcp: # the IP address of N4 interface on this SMF (PFCP)
     addr: {{ .Name }}-sbi
   ulcl: false
@@ -95,31 +98,38 @@ configuration:
         ipv4: 8.8.4.4
         ipv6: 2001:4860:4860::8844
   nrfUri: http://{{ .NrfIPAddress }}:{{ .NrfPort }} # a valid URI of NRF
+  locality: area1
 
 # the kind of log output
   # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
   # ReportCaller: enable the caller report or not, value: true or false
 logger:
   SMF:
-    debugLevel: info
+    debugLevel: trace
     ReportCaller: false
   NAS:
-    debugLevel: info
+    debugLevel: trace
     ReportCaller: false
   NGAP:
-    debugLevel: info
+    debugLevel: trace
     ReportCaller: false
   Aper:
     debugLevel: info
     ReportCaller: false
   PathUtil:
-    debugLevel: info
+    debugLevel: debug
     ReportCaller: false
   OpenApi:
-    debugLevel: info
+    debugLevel: debug
     ReportCaller: false
   PFCP:
-    debugLevel: info
+    debugLevel: trace
+    ReportCaller: false
+  PduSess:
+    debugLevel: trace
+    ReportCaller: false
+  CTX:
+    debugLevel: trace
     ReportCaller: false
 `
 
