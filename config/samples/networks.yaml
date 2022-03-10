@@ -8,7 +8,7 @@ spec:
             "cniVersion": "0.3.1",
             "name": "sbi",
             "type": "macvlan",
-            "master": "ens192",
+            "master": "ens160",
             "ipam": {
               "type": "whereabouts",
               "datastore": "kubernetes",
@@ -32,7 +32,7 @@ spec:
             "cniVersion": "0.3.1",
             "name": "ngap",
             "type": "macvlan",
-            "master": "ens192",
+            "master": "ens160",
             "ipam": {
               "type": "whereabouts",
               "datastore": "kubernetes",
@@ -56,7 +56,7 @@ spec:
             "cniVersion": "0.3.1",
             "name": "up",
             "type": "macvlan",
-            "master": "ens192",
+            "master": "ens160",
             "ipam": {
               "type": "whereabouts",
               "datastore": "kubernetes",

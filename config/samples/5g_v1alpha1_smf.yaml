@@ -4,8 +4,8 @@ metadata:
   name: smf-sample
 spec:
   config:
-    image: artifactory.haifa.ibm.com:5130/weit/free5gc-smf
-    image_init: artifactory.haifa.ibm.com:5130/weit/5ginitcontainer
+    image: 172.15.0.167:5000/weit/free5gc-smf:v3.0.6
+    image_init: 172.15.0.167:5000/weit/5ginitcontainer
     smf_name: smf-sample
     nrf_ip_address: "nrf-sample-sbi"
     nrf_port: "8000"
