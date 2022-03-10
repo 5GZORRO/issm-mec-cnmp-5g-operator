@@ -12,3 +12,4 @@ spec:
     up_nodes:
     - name: gNB
       type: AN
+      an_ip: 172.15.0.211

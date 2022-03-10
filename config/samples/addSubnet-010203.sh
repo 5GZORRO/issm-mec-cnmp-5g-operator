@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-NAMESPACE=${1:-5g-core}
+NAMESPACE=${1:-5g-test}
 
 kubectl create namespace $NAMESPACE
 

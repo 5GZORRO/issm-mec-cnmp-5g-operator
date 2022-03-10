@@ -15,3 +15,5 @@ spec:
       nodeType: UPF
       sd: "112233"
       sst: "1"
+      pools:
+        - 10.10.0.0/16

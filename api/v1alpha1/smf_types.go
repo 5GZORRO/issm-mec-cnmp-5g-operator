@@ -27,11 +27,13 @@ import (
 type UpNode struct {
 	Name   string `json:"name,omitempty"`
 	Type   string `json:"type,omitempty"`
+	AnIp   string `json:"an_ip,omitempty"`
 	NodeId string `json:"node_id,omitempty"`
 	NodeIdUp string `json:"node_id_up,omitempty"`
 	NodeIdSbi string `json:"node_id_sbi,omitempty"`
 	Sst    string `json:"sst,omitempty"`
 	Sd     string `json:"sd,omitempty"`
+	Pools  []string `json:"pools,omitempty"`
 }
 
 type Link struct {

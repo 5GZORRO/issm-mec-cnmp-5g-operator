@@ -10,7 +10,7 @@ import (
 )
 
 const SmfConfig = `info:
-  version: 1.0.0
+  version: 1.0.2
   description: SMF initial local configuration
 
 configuration:
@@ -35,8 +35,6 @@ configuration:
         - dnn: internet # Data Network Name
           dns: # the IP address of DNS
             ipv4: 8.8.8.8
-            ipv6: 2001:4860:4860::8888
-          ueSubnet: 60.60.0.0/16 # should be CIDR type
     - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
         sst: 1 # Slice/Service Type (uinteger, range: 0~255)
         sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
@@ -44,8 +42,6 @@ configuration:
         - dnn: internet # Data Network Name
           dns: # the IP address of DNS
             ipv4: 8.8.8.8
-            ipv6: 2001:4860:4860::8888
-          ueSubnet: 10.10.0.0/16 # should be CIDR type
   pfcp: # the IP address of N4 interface on this SMF (PFCP)
     addr: {{ .Name }}-sbi
   ulcl: false
@@ -55,6 +51,9 @@ configuration:
 {{- range .Nodes }}
       {{ .Name }}:
         type: {{ .Type }}
+{{- if .AnIp }}
+        an_ip: {{ .AnIp }}
+{{- end}}
 {{- if eq .Type "UPF" }}
         node_id: {{ .NodeIdSbi }} # the IP/FQDN of N4 interface on this UPF (PFCP)
         sNssaiUpfInfos: # S-NSSAI information list for this UPF
@@ -63,6 +62,12 @@ configuration:
               sd: {{ .Sd }} # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
             dnnUpfInfoList: # DNN information list for this S-NSSAI
               - dnn: internet
+{{- if .Pools}}
+                pools:
+{{- range .Pools}}
+                  - cidr: {{ . }}
+{{- end}}
+{{- end}}
         interfaces: # Interface list for this UPF
           - interfaceType: N3 # the type of the interface (N3 or N9)
             endpoints: # the IP address of this N3/N9 interface on this UPF
@@ -121,7 +126,7 @@ logger:
 `
 
 const EuRoutingConfig = `info:
-  version: 1.0.0
+  version: 1.0.1
   description: Routing information for UE
 `
 
