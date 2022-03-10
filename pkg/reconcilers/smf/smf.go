@@ -163,19 +163,27 @@ func (a Smf) AddNode(transition *v1alpha1.Transition) (string, error) {
 
 	pool, ok := transition.Spec.Config.Properties["pool"]
 	if !ok {
-		return "", fmt.Errorf("Missing pool")
+		// update the SMF CR, which should restart the pod with the new configuration
+		cr.Spec.Config.Nodes = append(cr.Spec.Config.Nodes, v1alpha1.UpNode{
+			Name:   nodeName,
+			Type:   nodeType,
+			NodeIdUp: nodeIdUp,
+			NodeIdSbi: nodeIdSbi,
+			Sd:     sd,
+			Sst:    sst,
+		})
+	} else {
+		// update the SMF CR, which should restart the pod with the new configuration
+		cr.Spec.Config.Nodes = append(cr.Spec.Config.Nodes, v1alpha1.UpNode{
+			Name:   nodeName,
+			Type:   nodeType,
+			NodeIdUp: nodeIdUp,
+			NodeIdSbi: nodeIdSbi,
+			Sd:     sd,
+			Sst:    sst,
+			Pool:   pool,
+		})
 	}
-
-	// update the SMF CR, which should restart the pod with the new configuration
-	cr.Spec.Config.Nodes = append(cr.Spec.Config.Nodes, v1alpha1.UpNode{
-		Name:   nodeName,
-		Type:   nodeType,
-		NodeIdUp: nodeIdUp,
-		NodeIdSbi: nodeIdSbi,
-		Sd:     sd,
-		Sst:    sst,
-		Pool:   pool,
-	})
 
 	err = a.k8sUtils.UpdateCR(cr)
 	return "", err
