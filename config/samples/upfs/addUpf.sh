@@ -1,11 +1,11 @@
 #! /usr/bin/env bash
 
 NAMESPACE=${1:-5g-test}
-URL=${1:-http://127.0.0.1:38000}
+URL=${2:-http://127.0.0.1:38000}
 
 kubectl create namespace $NAMESPACE
 
-export BETWEEN=10
+export BETWEEN=30
 
 # RAN
 kubectl apply -f ./5g_v1alpha1_upf-r1.yaml -n $NAMESPACE

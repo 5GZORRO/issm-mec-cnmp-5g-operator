@@ -37,12 +37,12 @@ curl -X POST \
   -H 'content-type: application/json' \
   -d '{
   "topology": [
-    {"A": "gNB1", "B": "UPF-R1"},
-    {"A": "UPF-R1", "B": "UPF-T1"},
-    {"A": "UPF-T1", "B": "UPF-C1"}
+    {"A": "gNB", "B": "UPF-R1"},
+    {"A": "upf-r1-sample", "B": "upf-t1-sample"},
+    {"A": "upf-t1-sample", "B": "upf-c1-sample"}
   ],
   "specificPath": [
-    {"dest": "60.61.0.0/16", "path": ["UPF-R1", "UPF-T1", "UPF-C1"]}
+    {"dest": "60.61.0.0/16", "path": ["upf-r1-sample", "upf-t1-sample", "upf-c1-sample"]}
   ]
 }'
 
@@ -51,12 +51,12 @@ curl -X POST \
   -H 'content-type: application/json' \
   -d '{
   "topology": [
-    {"A": "gNB1", "B": "UPF-R1"},
-    {"A": "UPF-R1", "B": "UPF-T2"},
-    {"A": "UPF-T2", "B": "UPF-C4"}
+    {"A": "gNB", "B": "UPF-R1"},
+    {"A": "upf-r1-sample", "B": "upf-c2-sample"},
+    {"A": "upf-t2-sample", "B": "upf-c4-sample"}
   ],
   "specificPath": [
-    {"dest": "60.64.0.0/16", "path": ["UPF-R1", "UPF-T2", "UPF-C4"]}
+    {"dest": "60.64.0.0/16", "path": ["upf-r1-sample", "upf-t2-sample", "upf-c4-sample"]}
   ]
 }'
 
