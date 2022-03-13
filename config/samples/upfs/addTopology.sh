@@ -37,7 +37,7 @@ curl -X POST \
   -H 'content-type: application/json' \
   -d '{
   "topology": [
-    {"A": "gNB", "B": "UPF-R1"},
+    {"A": "gNB", "B": "upf-r1-sample"},
     {"A": "upf-r1-sample", "B": "upf-t1-sample"},
     {"A": "upf-t1-sample", "B": "upf-c1-sample"}
   ],
@@ -51,7 +51,7 @@ curl -X POST \
   -H 'content-type: application/json' \
   -d '{
   "topology": [
-    {"A": "gNB", "B": "UPF-R1"},
+    {"A": "gNB", "B": "upf-r1-sample"},
     {"A": "upf-r1-sample", "B": "upf-c2-sample"},
     {"A": "upf-t2-sample", "B": "upf-c4-sample"}
   ],

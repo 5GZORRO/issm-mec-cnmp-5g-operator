@@ -47,7 +47,7 @@ configuration:
       mnc: "93"
   pfcp: # the IP address of N4 interface on this SMF (PFCP)
     addr: {{ .Name }}-sbi
-  ulcl: false
+  ulcl: true
 {{- if .Nodes }}
   userplane_information: # list of userplane information
     up_nodes: # information of userplane node (AN or UPF)
@@ -81,13 +81,7 @@ configuration:
 {{- end}}
 {{- end}}
 {{- end}}
-{{- if .Links}}
-    links:
-{{- range .Links}}
-      - A: {{ .AEnd }}
-        B: {{ .BEnd }}
-{{- end}}
-{{- end}}
+    links: null
   dnn:
     internet:
       dns:
