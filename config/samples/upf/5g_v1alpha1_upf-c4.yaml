@@ -1,0 +1,12 @@
+apiVersion: 5g.ibm.com/v1alpha1
+kind: Upf
+metadata:
+  name: upf-c4-sample
+spec:
+  config:
+    image: 172.15.0.167:5000/weit/free5gc-upf-tools:v3.0.6
+    image_init: 172.15.0.167:5000/weit/5ginitcontainer
+    upf_name: upf-c4-sample
+    dnns:
+    - dnn_name: internet
+      apn_cidr: "60.64.0.0/16"
