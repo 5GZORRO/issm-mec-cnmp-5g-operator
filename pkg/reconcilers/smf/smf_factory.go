@@ -53,6 +53,12 @@ func (f SmfReconcilerFactory) version13ReconcileBuilder() common.FiveGReconcileF
 				return smfv13.SmfPod(cr, cm)
 			},
 		},
+		ServiceFuncs: []common.ReconcileService{
+			func(instance interface{}) *corev1.Service {
+				cr := instance.(*fivegv1alpha1.Smf)
+				return smfv13.SmfService(cr)
+			},
+		},
 		ConfigMapFuncs: []common.ReconcileConfigMap{
 			func(instance interface{}) (*corev1.ConfigMap, error) {
 				cr := instance.(*fivegv1alpha1.Smf)

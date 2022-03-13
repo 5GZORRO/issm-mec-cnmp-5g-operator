@@ -4,8 +4,9 @@ metadata:
   name: smf-sample
 spec:
   config:
-    image: 172.15.0.167:5000/weit/free5gc-smf:v3.0.6
+    image: 172.15.0.167:5000/weit/free5gc-smf:v3.0.6-dynamic-load
     image_init: 172.15.0.167:5000/weit/5ginitcontainer
+    image_ext: 172.15.0.167:5000/weit/free5gc-smf-ext:v3.0.6-dynamic-load
     smf_name: smf-sample
     nrf_ip_address: "nrf-sample-sbi"
     nrf_port: "8000"

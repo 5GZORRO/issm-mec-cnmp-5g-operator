@@ -58,6 +58,7 @@ type SmfConfig struct {
 	PodSettings  *PodSettingsSpec `json:"podSettings,omitempty"`
 	ImageUrl     string           `json:"image,omitempty"`
 	ImageUrlInit string           `json:"image_init,omitempty"`
+	ImageExtUrl  string           `json:"image_ext,omitempty"`
 	NrfIPAddress string           `json:"nrf_ip_address,omitempty"`
 	NrfPort      string           `json:"nrf_port,omitempty"`
 	Nodes        []UpNode         `json:"up_nodes,omitempty"`

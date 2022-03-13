@@ -99,6 +99,7 @@ configuration:
         ipv6: 2001:4860:4860::8844
   nrfUri: http://{{ .NrfIPAddress }}:{{ .NrfPort }} # a valid URI of NRF
   locality: area1
+  smfExtUri: http://127.0.0.1:8080
 
 # the kind of log output
   # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
