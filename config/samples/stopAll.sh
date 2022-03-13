@@ -13,3 +13,5 @@ echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-"
 kubectl  delete vCache  --all -n $NAMESPACE
 
 kubectl delete -f . -n $NAMESPACE
+
+kubectl delete UPF -n $NAMESPACE --all
