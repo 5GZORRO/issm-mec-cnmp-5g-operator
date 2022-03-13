@@ -18,7 +18,7 @@ configuration:
   sbi: # Service-based interface information
     scheme: http # the protocol for sbi (http or https)
     registerIPv4: {{ .Name }}-sbi # IP used to register to NRF
-    bindingIPv4: {{ .Name }}-sbi  # IP used to bind the service
+    bindingIPv4: 0.0.0.0  # IP used to bind the service
     port: 8000 # Port used to bind the service
     tls: # the local path of TLS key
       key: free5gc/support/TLS/smf.key # SMF TLS Certificate
