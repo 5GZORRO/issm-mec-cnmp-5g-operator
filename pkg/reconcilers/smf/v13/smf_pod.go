@@ -24,7 +24,7 @@ func SmfPod(cr *fivegv1alpha1.Smf, cm *corev1.ConfigMap) *corev1.Pod {
 			Name:      cr.Name,
 			Namespace: cr.Namespace,
 			Labels: map[string]string{
-				"app": "smf",
+				"app": cr.Name,
 			},
 			Annotations: map[string]string{
 				// annotate with cm hash so that if the cm changes, the pod is recreated
