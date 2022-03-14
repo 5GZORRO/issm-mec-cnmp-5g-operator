@@ -9,10 +9,11 @@ import (
 func SmfService(cr *fivegv1alpha1.Smf) *corev1.Service {
 	return &corev1.Service{
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      "smf",
+			Name:      cr.Name,
 			Namespace: cr.Namespace,
 			Labels: map[string]string{
-				"app": "smf",
+				// smf name
+				"app": cr.Name,
 			},
 		},
 		Spec: corev1.ServiceSpec{
@@ -32,7 +33,8 @@ func SmfService(cr *fivegv1alpha1.Smf) *corev1.Service {
 				},
 			},
 			Selector: map[string]string{
-				"app": "smf",
+				// smf name
+				"app": cr.Name,
 			},
 			SessionAffinity: "None",
 		},
