@@ -21,7 +21,7 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 		anotations = map[string]string{
 			"k8s.v1.cni.cncf.io/networks": fmt.Sprintf("[{\"name\" : \"sbi\"}, {\"name\" : \"up\"}]"),}
 	}
-	return &corev1.Pod{
+	pod := corev1.Pod{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      cr.Name,
 			Namespace: cr.Namespace,
@@ -67,6 +67,14 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 			},
 		},
 	}
+	
+	if cr.Spec.Config.Elicensing.IsActive{
+		licenseSidecarContainer := licensingContainer(cr, false)
+		licenseInitContainer := licensingContainer(cr, true)
+		pod.Spec.Containers = append(pod.Spec.Containers, *licenseSidecarContainer)
+		pod.Spec.InitContainers = append(pod.Spec.InitContainers, *licenseInitContainer)
+	}
+	return &pod
 }
 
 func upfInitContainer(cr *fivegv1alpha1.Upf) *corev1.Container {
@@ -130,4 +138,48 @@ func upfContainer(cr *fivegv1alpha1.Upf) *corev1.Container {
 			},
 		},
 	}
+}
+
+func licensingContainer(cr *fivegv1alpha1.Upf, isInitContainer bool) *corev1.Container {
+
+	container := &corev1.Container{
+		Name:            "elma-init-container",
+		Image:           cr.Spec.Config.Elicensing.Image,
+		ImagePullPolicy: corev1.PullAlways,
+		Env: []corev1.EnvVar{
+			{
+				Name: "INSTANCE_ID",
+				ValueFrom: &corev1.EnvVarSource{
+					FieldRef: &corev1.ObjectFieldSelector{
+						FieldPath: "metadata.uid",
+					},
+				},
+			},
+			{
+				Name: "DESCRIPTOR_ID",
+				Value: cr.Spec.Config.Elicensing.DescriptorId,
+			},
+			{
+				Name:  "ELMA_IP",
+				Value: cr.Spec.Config.Elicensing.ElmaIp,
+			},
+			{
+				Name:  "PRODUCT_OFFERING",
+				Value: cr.Spec.Config.Elicensing.ProductOfferingId,
+			},
+		},
+		Command: []string{"/bin/bash", "-c", "/bin/bash inithook.sh"},
+	}
+	if !isInitContainer {
+		container.Lifecycle = &corev1.Lifecycle{
+			PreStop: &corev1.Handler{
+				Exec: &corev1.ExecAction{
+					Command: []string{"/bin/bash", "-c", "curl 'http://localhost:8000/SendEndHook'"},
+				},
+			},
+		}
+		container.Name = "elma-sidecar-container"
+		container.Command = []string{"/bin/bash", "-c", "/bin/bash start.sh"}
+	}
+	return container
 }
