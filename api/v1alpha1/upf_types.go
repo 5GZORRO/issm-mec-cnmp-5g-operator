@@ -39,6 +39,16 @@ type UpfConfig struct {
 	Dnns        []Dnn            `json:"dnns,omitempty"`
 	Name        string           `json:"upf_name,omitempty"`
 	DataNetworkName string       `json:"data_network_name,omitempty"`
+	Elicensing *Elicensing       `json:"elicensing,omitempty"`
+}
+
+// Elicensing defines the parameters required to request POP check 
+type Elicensing struct {
+	ElmaIp				string	`json:"elma_ip,omitempty"`
+	Image				string	`json:"image,omitempty"`
+	ProductOfferingId	string	`json:"product_offering_id,omitempty"`
+	IsActive			bool	`json:"is_active,"`
+	DescriptorId        string  `json:"descriptor_id,omitempty"`
 }
 
 // UpfInternal config settings derived from other services
