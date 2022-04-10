@@ -3,7 +3,7 @@
 # To re-generate a bundle for another specific version without changing the standard setup, you can:
 # - use the VERSION as arg of the bundle target (e.g make bundle VERSION=0.0.2)
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
-VERSION ?= 7d3af58
+VERSION ?= 8307983
 
 # CHANNELS define the bundle channels used in the bundle.
 # Add a new line here if you would like to change its default config. (E.g CHANNELS = "preview,fast,stable")
@@ -29,7 +29,7 @@ BUNDLE_METADATA_OPTS ?= $(BUNDLE_CHANNELS) $(BUNDLE_DEFAULT_CHANNEL)
 #
 # For example, running 'make bundle-build bundle-push catalog-build catalog-push' will build and push both
 # ibm.com/5goperator-bundle:$VERSION and ibm.com/5goperator-catalog:$VERSION.
-IMAGE_TAG_BASE ?= 172.15.0.167:5000/weit/5goperator
+IMAGE_TAG_BASE ?= 84.88.32.158:5000/weit/5goperator
 IMAGE_TAG_BASE_LOCAL ?= localhost:5000/5goperator
 
 # BUNDLE_IMG defines the image:tag used for the bundle.
