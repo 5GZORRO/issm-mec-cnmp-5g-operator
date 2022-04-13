@@ -1,9 +1,0 @@
-compose:
-  - name: Create
-    deploy:
-      - objects:
-          file: n3iwf_create.yaml
-        immediateCleanupOn: Always
-    checkReady:
-      script: check-ready-on-create.py
-    getOutputs: outputs-on-create.py 
