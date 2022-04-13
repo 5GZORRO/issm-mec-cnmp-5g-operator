@@ -1,27 +1,82 @@
 # 5GOperator
 
-This is a Kubernetes Operator for installing components of a [5G Core Network](https://www.free5gc.org/) based on work
-[here](https://github.ibm.com/Brian-P-Naughton/free5g). It is intended to be installed with and managed by
-[CP4NA](https://www.ibm.com/docs/en/cloud-paks/cp-network-auto/2.1) and a companion Zero Touch Orchestration system (to be
-implemented).
+This is a Kubernetes Operator for installing components of a [5G Core Network](https://www.free5gc.org/)
 
-It demonstrates an approach to CP4NA integration with Kubernetes Operators. The only part that is necessary for it to work
-in the CP4NA/Zero Touch ecosystem is the `generation` and `observedGeneration` [handling](api/v1alpha1/status.go), as outlined
-in the Zero Touch Reference Architecture document. In particular, the vendor is free to implement whatever Conditions they see fit;
-the Zero Touch Orchestrator will provide mechanisms yet to be worked out on how to apply policy to changes in Conditions.
+Log into kubernetes master
 
-# Docs
+## Pre-requisites
 
-- [Architecture](docs/architecture.md)
-- [Installation Guide](docs/installation.md)
-- [Developer Guide](docs/development.md)
+### golang
 
-# Limitations and Further Work
+Install golang **v1.16**: https://golang.org/doc/install
 
-* The 5G operator is not production ready code; there are no tests, the code has not been reviewed, it has not had a lot of testing, 
-  it could do with some refactoring (to extract common reconciliation code relating to the 5G components), etc
-* The handling of operations e.g. AddNode for SMF may not ensure continued availability of the component (SMF) because the operator may restart the pod. CP4NA should define replicas for the resource to handle this.
-* A lot of [boilerplate](cp4na/xnfs/5G/amf/Lifecycle/kubernetes) is currently required in resource packages - need to update kubedriver to handle a lot of this
-* It's probable that we can extract most of the Transition code (and perhaps other parts) in to an SDK so that the vendor
-  has to implement only the actual transition or operation itself (a lot of the Transition handling code would be transferable
-  to other implementations)
+then issue
+
+```
+source ~/.profile
+```
+
+validate
+
+```
+go version
+```
+
+### operator-sdk
+
+Install operator-sdk **v1.8.0** from [install-from-github-release](https://sdk.operatorframework.io/docs/installation/#install-from-github-release)
+
+## Install
+
+### Clone
+
+```bash
+cd ~
+git clone https://github.com/5GZORRO/issm-mec-cnmp-5g-operator.git
+cd issm-mec-cnmp-5g-operator
+```
+
+### Deploy the operator
+
+```bash
+make generate
+make manifests
+make deploy
+```
+
+Wait for controller pod to start
+
+```
+kubectl get pod -n 5g
+```
+
+**Notes:** 
+
+* before using 'make', load your profile: `source ~/.profile`
+* to un-install the operator: `make undeploy`
+
+## Build (**relevant for developers only**)
+
+1. Edit Makefile with `VERSION ?= temp` so that the resulted image tag does not collide with the existing one.
+
+1. Edit Makefile with `IMAGE_TAG_BASE` with the proper image registry. Note: current version uses an internal registry to hold the operator and 5G network function images.
+
+1. Build and push the image.
+
+    ```
+    make generate
+    ```
+    
+    ```
+    make manifests
+    ```
+    
+    ```
+    make docker-build docker-push
+    ```
+
+1. Deploy the operator
+
+   ```
+   make deploy
+   ```
