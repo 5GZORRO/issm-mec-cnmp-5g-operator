@@ -16,6 +16,7 @@ func cmHash(cm *corev1.ConfigMap) string {
 
 func SmfPod(cr *fivegv1alpha1.Smf, cm *corev1.ConfigMap) *corev1.Pod {
 	container := smfContainer(cr)
+	container_ext := smfExtContainer(cr)
 	init_container := smfInitContainer(cr)
 
 	return &corev1.Pod{
@@ -23,7 +24,7 @@ func SmfPod(cr *fivegv1alpha1.Smf, cm *corev1.ConfigMap) *corev1.Pod {
 			Name:      cr.Name,
 			Namespace: cr.Namespace,
 			Labels: map[string]string{
-				"app": "smf",
+				"app": cr.Name,
 			},
 			Annotations: map[string]string{
 				// annotate with cm hash so that if the cm changes, the pod is recreated
@@ -34,6 +35,7 @@ func SmfPod(cr *fivegv1alpha1.Smf, cm *corev1.ConfigMap) *corev1.Pod {
 		Spec: corev1.PodSpec{
 			Containers: []corev1.Container{
 				*container,
+				*container_ext,
 			},
 			InitContainers: []corev1.Container{
 				*init_container,
@@ -123,5 +125,16 @@ func smfContainer(cr *fivegv1alpha1.Smf) *corev1.Container {
 				MountPath: "/free5gc/config",
 			},
 		},
+	}
+}
+
+func smfExtContainer(cr *fivegv1alpha1.Smf) *corev1.Container {
+	return &corev1.Container{
+		Name:            "smf-ext",
+		Image:           cr.Spec.Config.ImageExtUrl,
+		ImagePullPolicy: corev1.PullAlways,
+		Env:             []corev1.EnvVar{},
+		TerminationMessagePath:   "/dev/termination-log",
+		TerminationMessagePolicy: "File",
 	}
 }

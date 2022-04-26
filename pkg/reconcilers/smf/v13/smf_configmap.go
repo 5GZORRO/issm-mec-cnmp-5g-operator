@@ -10,7 +10,7 @@ import (
 )
 
 const SmfConfig = `info:
-  version: 1.0.0
+  version: 1.0.2
   description: SMF initial local configuration
 
 configuration:
@@ -18,7 +18,7 @@ configuration:
   sbi: # Service-based interface information
     scheme: http # the protocol for sbi (http or https)
     registerIPv4: {{ .Name }}-sbi # IP used to register to NRF
-    bindingIPv4: {{ .Name }}-sbi  # IP used to bind the service
+    bindingIPv4: 0.0.0.0  # IP used to bind the service
     port: 8000 # Port used to bind the service
     tls: # the local path of TLS key
       key: free5gc/support/TLS/smf.key # SMF TLS Certificate
@@ -35,8 +35,6 @@ configuration:
         - dnn: internet # Data Network Name
           dns: # the IP address of DNS
             ipv4: 8.8.8.8
-            ipv6: 2001:4860:4860::8888
-          ueSubnet: 60.60.0.0/16 # should be CIDR type
     - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
         sst: 1 # Slice/Service Type (uinteger, range: 0~255)
         sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
@@ -44,17 +42,21 @@ configuration:
         - dnn: internet # Data Network Name
           dns: # the IP address of DNS
             ipv4: 8.8.8.8
-            ipv6: 2001:4860:4860::8888
-          ueSubnet: 10.10.0.0/16 # should be CIDR type
+  plmnList:
+    - mcc: "208"
+      mnc: "93"
   pfcp: # the IP address of N4 interface on this SMF (PFCP)
     addr: {{ .Name }}-sbi
-  ulcl: false
+  ulcl: true
 {{- if .Nodes }}
   userplane_information: # list of userplane information
     up_nodes: # information of userplane node (AN or UPF)
 {{- range .Nodes }}
       {{ .Name }}:
         type: {{ .Type }}
+{{- if .AnIp }}
+        an_ip: {{ .AnIp }}
+{{- end}}
 {{- if eq .Type "UPF" }}
         node_id: {{ .NodeIdSbi }} # the IP/FQDN of N4 interface on this UPF (PFCP)
         sNssaiUpfInfos: # S-NSSAI information list for this UPF
@@ -63,6 +65,10 @@ configuration:
               sd: {{ .Sd }} # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
             dnnUpfInfoList: # DNN information list for this S-NSSAI
               - dnn: internet
+{{- if .Pool }}
+                pools:
+                  - cidr: {{ .Pool }}
+{{- end}}
         interfaces: # Interface list for this UPF
           - interfaceType: N3 # the type of the interface (N3 or N9)
             endpoints: # the IP address of this N3/N9 interface on this UPF
@@ -75,13 +81,7 @@ configuration:
 {{- end}}
 {{- end}}
 {{- end}}
-{{- if .Links}}
-    links:
-{{- range .Links}}
-      - A: {{ .AEnd }}
-        B: {{ .BEnd }}
-{{- end}}
-{{- end}}
+    links: null
   dnn:
     internet:
       dns:
@@ -92,36 +92,44 @@ configuration:
         ipv4: 8.8.4.4
         ipv6: 2001:4860:4860::8844
   nrfUri: http://{{ .NrfIPAddress }}:{{ .NrfPort }} # a valid URI of NRF
+  locality: area1
+  smfExtUri: http://127.0.0.1:8080
 
 # the kind of log output
   # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
   # ReportCaller: enable the caller report or not, value: true or false
 logger:
   SMF:
-    debugLevel: info
+    debugLevel: trace
     ReportCaller: false
   NAS:
-    debugLevel: info
+    debugLevel: trace
     ReportCaller: false
   NGAP:
-    debugLevel: info
+    debugLevel: trace
     ReportCaller: false
   Aper:
     debugLevel: info
     ReportCaller: false
   PathUtil:
-    debugLevel: info
+    debugLevel: debug
     ReportCaller: false
   OpenApi:
-    debugLevel: info
+    debugLevel: debug
     ReportCaller: false
   PFCP:
-    debugLevel: info
+    debugLevel: trace
+    ReportCaller: false
+  PduSess:
+    debugLevel: trace
+    ReportCaller: false
+  CTX:
+    debugLevel: trace
     ReportCaller: false
 `
 
 const EuRoutingConfig = `info:
-  version: 1.0.0
+  version: 1.0.1
   description: Routing information for UE
 `
 

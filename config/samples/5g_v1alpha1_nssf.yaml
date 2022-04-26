@@ -12,8 +12,8 @@ spec:
         limits:
           memory: "200Mi"
           cpu: "0.2"
-    image: artifactory.haifa.ibm.com:5130/weit/free5gc-nssf
-    image_init: artifactory.haifa.ibm.com:5130/weit/5ginitcontainer
+    image: 172.15.0.167:5000/weit/free5gc-nssf:v3.0.6
+    image_init: 172.15.0.167:5000/weit/5ginitcontainer
     # TODO: nssf_name assumed same value as name
     nssf_name: nssf-sample
     nrf_ip_address: "nrf-sample-sbi"

@@ -34,6 +34,7 @@ Install operator-sdk **v1.8.0** from [install-from-github-release](https://sdk.o
 cd ~
 git clone https://github.com/5GZORRO/issm-mec-cnmp-5g-operator.git
 cd issm-mec-cnmp-5g-operator
+git checkout v3.0.6-dynamic-load
 ```
 
 ### Deploy the operator
@@ -80,3 +81,4 @@ kubectl get pod -n 5g
    ```
    make deploy
    ```
+

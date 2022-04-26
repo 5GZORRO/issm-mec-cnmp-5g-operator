@@ -6,12 +6,14 @@ metadata:
 spec:
   config:
     resourceType: "smfs.v1alpha1.5g.ibm.com"
-    resourceNamespace: 5g-core
+    resourceNamespace: 5g-test
     resourceName: smf-sample
     transition: AttachNode
     properties:
-      nodeId: upf1-sample
+      nodeIdSbi: upf1-sample-sbi
+      nodeIdUp: upf1-sample-up
       nodeName: upf1-sample
       nodeType: UPF
       sd: "010203"
       sst: "1"
+      pool: 60.60.0.0/16

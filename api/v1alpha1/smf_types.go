@@ -27,11 +27,13 @@ import (
 type UpNode struct {
 	Name   string `json:"name,omitempty"`
 	Type   string `json:"type,omitempty"`
+	AnIp   string `json:"an_ip,omitempty"`
 	NodeId string `json:"node_id,omitempty"`
 	NodeIdUp string `json:"node_id_up,omitempty"`
 	NodeIdSbi string `json:"node_id_sbi,omitempty"`
 	Sst    string `json:"sst,omitempty"`
 	Sd     string `json:"sd,omitempty"`
+	Pool   string `json:"pool,omitempty"`
 }
 
 type Link struct {
@@ -56,6 +58,7 @@ type SmfConfig struct {
 	PodSettings  *PodSettingsSpec `json:"podSettings,omitempty"`
 	ImageUrl     string           `json:"image,omitempty"`
 	ImageUrlInit string           `json:"image_init,omitempty"`
+	ImageExtUrl  string           `json:"image_ext,omitempty"`
 	NrfIPAddress string           `json:"nrf_ip_address,omitempty"`
 	NrfPort      string           `json:"nrf_port,omitempty"`
 	Nodes        []UpNode         `json:"up_nodes,omitempty"`

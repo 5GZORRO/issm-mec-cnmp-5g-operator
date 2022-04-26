@@ -1,0 +1,26 @@
+{
+    "up_nodes": {
+        "upf-c1-sample": {
+            "type": "UPF",
+            "node_id": "upf-c1-sample-sbi",
+            "sNssaiUpfInfos": [
+              {
+                  "sNssai": {"sst": 1, "sd": "010203"},
+                  "dnnUpfInfoList": [
+                      {
+                          "dnn": "internet",
+                          "pools": [{"cidr": "60.61.0.0/24"}]
+                      }
+                  ]
+              }
+            ],
+            "interfaces": [
+                {
+                    "interfaceType": "N9",
+                    "endpoints": ["upf-c1-sample-up"],
+                    "networkInstance": "internet"
+                }            
+            ]
+        }
+    }
+}

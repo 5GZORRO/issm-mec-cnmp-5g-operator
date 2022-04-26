@@ -67,8 +67,8 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 			},
 		},
 	}
-	
-	if cr.Spec.Config.Elicensing.IsActive{
+
+	if cr.Spec.Config.Elicensing != nil && cr.Spec.Config.Elicensing.IsActive{
 		licenseSidecarContainer := licensingContainer(cr, false)
 		licenseInitContainer := licensingContainer(cr, true)
 		pod.Spec.Containers = append(pod.Spec.Containers, *licenseSidecarContainer)

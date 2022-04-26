@@ -27,6 +27,7 @@ configuration:
     # [optional] gtpu.ifname
     # - ifname: gtpif
 
+{{- if .Dnns}}
   dnn_list:
 {{- range .Dnns }}
     - dnn: internet
@@ -34,6 +35,7 @@ configuration:
       cidr: {{ .ApnCIDR }}
       {{end}}
       # [optional] apn_list[*].natifname
+{{- end}}
 {{- end}}
 `
 
