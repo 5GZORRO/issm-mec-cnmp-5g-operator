@@ -59,6 +59,10 @@ func (a Upf) UpdateStatus(opResult controllerutil.OperationResult, instance comm
 
 			cr.Status.Update(cr.ObjectMeta, isReconciled, opResult)
 			_, _ = a.k8sUtils.ExecCommand(obj, "upf", "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE")
+			// net1: sbi network
+			_, _ = a.k8sUtils.ExecCommand(obj, "upf", "iptables -t nat -A POSTROUTING -o net1 -j MASQUERADE")
+			// net2: up network
+			_, _ = a.k8sUtils.ExecCommand(obj, "upf", "iptables -t nat -A POSTROUTING -o net2 -j MASQUERADE")
 			// TODO: write this better
 			if cr.Spec.Config.DataNetworkName != "" {
 				_, _ = a.k8sUtils.ExecCommand(obj, "upf", "iptables -t nat -A POSTROUTING -o net3 -j MASQUERADE")
