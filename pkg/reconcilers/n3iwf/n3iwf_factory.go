@@ -17,9 +17,9 @@ limitations under the License.
 package n3iwf
 
 import (
-	fivegv1alpha1 "github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/common"
-	n3iwfv13 "github.ibm.com/Steve-Glover/5GOperator/pkg/reconcilers/n3iwf/v13"
+	fivegv1alpha1 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/common"
+	n3iwfv13 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/reconcilers/n3iwf/v13"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )

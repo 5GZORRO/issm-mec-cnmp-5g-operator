@@ -19,9 +19,9 @@ package mongo
 import (
 	"context"
 	"fmt"
-	"github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	fivegv1alpha1 "github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/common"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	fivegv1alpha1 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/common"
 	v12 "k8s.io/api/core/v1"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

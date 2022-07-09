@@ -17,9 +17,9 @@ limitations under the License.
 package udr
 
 import (
-	fivegv1alpha1 "github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/common"
-	udrv13 "github.ibm.com/Steve-Glover/5GOperator/pkg/reconcilers/udr/v13"
+	fivegv1alpha1 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/common"
+	udrv13 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/reconcilers/udr/v13"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )

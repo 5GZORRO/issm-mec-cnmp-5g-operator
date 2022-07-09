@@ -17,7 +17,7 @@ limitations under the License.
 package transition
 
 import (
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/common"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/common"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 )
 

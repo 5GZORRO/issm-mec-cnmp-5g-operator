@@ -2,7 +2,7 @@ package v13
 
 import (
 	"bytes"
-	"github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
 	"text/template"
 
 	corev1 "k8s.io/api/core/v1"

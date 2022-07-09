@@ -17,9 +17,9 @@ limitations under the License.
 package mongo
 
 import (
-	fivegv1alpha1 "github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	common "github.ibm.com/Steve-Glover/5GOperator/pkg/common"
-	mongov13 "github.ibm.com/Steve-Glover/5GOperator/pkg/reconcilers/mongo/v13"
+	fivegv1alpha1 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	common "github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/common"
+	mongov13 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/reconcilers/mongo/v13"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )

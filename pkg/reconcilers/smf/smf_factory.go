@@ -18,9 +18,9 @@ package smf
 
 import (
 	"context"
-	fivegv1alpha1 "github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/common"
-	smfv13 "github.ibm.com/Steve-Glover/5GOperator/pkg/reconcilers/smf/v13"
+	fivegv1alpha1 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/common"
+	smfv13 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/reconcilers/smf/v13"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/types"
