@@ -82,3 +82,9 @@ kubectl get pod -n 5g
    make deploy
    ```
 
+## Maintainers
+**Avi Weit** - weit@il.ibm.com
+
+## Licensing
+
+This 5GZORRO component is published under Apache 2.0 license. Please see the [LICENSE](./LICENSE) file for further details.
