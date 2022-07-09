@@ -1,4 +1,4 @@
-module github.ibm.com/Steve-Glover/5GOperator
+module github.com/5GZORRO/issm-mec-cnmp-5g-operator
 
 go 1.15
 

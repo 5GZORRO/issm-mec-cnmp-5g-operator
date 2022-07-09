@@ -21,7 +21,7 @@ limitations under the License.
 package v1alpha1
 
 import (
-	"github.ibm.com/Steve-Glover/5GOperator/api/model"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/model"
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"

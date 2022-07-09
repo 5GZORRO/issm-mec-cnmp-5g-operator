@@ -21,7 +21,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
 	"io"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"

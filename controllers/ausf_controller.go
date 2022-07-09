@@ -32,9 +32,9 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	fivegv1alpha1 "github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/common"
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/reconcilers/ausf"
+	fivegv1alpha1 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/common"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/reconcilers/ausf"
 )
 
 // AusfReconciler reconciles a Ausf object

@@ -31,9 +31,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"strings"
 
-	fivegv1alpha1 "github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/common"
-	"github.ibm.com/Steve-Glover/5GOperator/pkg/reconcilers/webconsole"
+	fivegv1alpha1 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/common"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/pkg/reconcilers/webconsole"
 )
 
 // WebconsoleReconciler reconciles a Webconsole object

@@ -18,8 +18,8 @@ package common
 
 import (
 	"fmt"
-	"github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
-	fivegv1alpha1 "github.ibm.com/Steve-Glover/5GOperator/api/v1alpha1"
+	"github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
+	fivegv1alpha1 "github.com/5GZORRO/issm-mec-cnmp-5g-operator/api/v1alpha1"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	"strings"
 )
