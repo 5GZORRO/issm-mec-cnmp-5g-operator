@@ -1,10 +1,17 @@
-# 5GOperator
+# issm-mec-cnmp-5g-operator
 
-This is a Kubernetes Operator for installing components of a [5G Core Network](https://www.free5gc.org/)
+This project acts as a VNFM for free5gc network functions.
+
+It implements the Kubernetes Operator which is based on [operator-sdk](https://sdk.operatorframework.io) and is responsible to deploy and manage  [Free 5GC](https://www.free5gc.org/) NF components by using declarative [Kubernetes Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources).
+
+## Prerequisites
+
+* [golang](https://go.dev/)
+* [operator-sdk](https://sdk.operatorframework.io)
+
+## Installation
 
 Log into kubernetes master
-
-## Pre-requisites
 
 ### golang
 
@@ -26,9 +33,9 @@ go version
 
 Install operator-sdk **v1.8.0** from [install-from-github-release](https://sdk.operatorframework.io/docs/installation/#install-from-github-release)
 
-## Install
+### 5g-operator
 
-### Clone
+Clone
 
 ```bash
 cd ~
@@ -37,7 +44,7 @@ cd issm-mec-cnmp-5g-operator
 git checkout v3.0.6-dynamic-load
 ```
 
-### Deploy the operator
+Deploy the operator
 
 ```bash
 make generate
@@ -84,6 +91,8 @@ kubectl get pod -n 5g
 
 ## Maintainers
 **Avi Weit** - weit@il.ibm.com
+
+**David Breitgand** - davidbr@il.ibm.com
 
 ## Licensing
 
