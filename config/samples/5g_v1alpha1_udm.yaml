@@ -12,7 +12,7 @@ spec:
         limits:
           memory: "200Mi"
           cpu: "0.2"
-    image: 172.15.0.167:5000/weit/free5gc-udm:v3.0.6
+    image: 172.15.0.167:5000/weit/free5gc-udm:v3.1.1
     image_init: 172.15.0.167:5000/weit/5ginitcontainer
     # TODO: udm_name assumed same value as name
     udm_name: udm-sample
