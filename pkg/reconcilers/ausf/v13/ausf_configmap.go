@@ -26,7 +26,7 @@ import (
 )
 
 const AusfConfig = `info:
-  version: 1.0.0
+  version: 1.0.2
   description: AUSF initial local configuration
 
 configuration:
@@ -35,6 +35,9 @@ configuration:
     registerIPv4: {{ .Name }}-sbi # IP used to register to NRF
     bindingIPv4: {{ .Name }}-sbi  # IP used to bind the service
     port: 8000 # Port used to bind the service
+    tls: # the local path of TLS key
+      pem: ./config/TLS/ausf.pem # AUSF TLS Certificate
+      key: ./config/TLS/ausf.key # AUSF TLS Private key    
   serviceNameList: # the SBI services provided by this AUSF, refer to TS 29.509
     - nausf-auth # Nausf_UEAuthentication service
   nrfUri: http://{{ .NrfIPAddress }}:{{ .NrfPort }} # a valid URI of NRF

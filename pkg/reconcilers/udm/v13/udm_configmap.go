@@ -26,7 +26,7 @@ import (
 )
 
 const UdmConfig = `info:
-  version: 1.0.1
+  version: 1.0.2
   description: UDM initial local configuration
 
 configuration:
@@ -42,9 +42,8 @@ configuration:
     bindingIPv4: {{ .Name }}-sbi # IP used to bind the service
     port: 8000 # Port used to bind the service
     tls: # the local path of TLS key
-      log: free5gc/udmsslkey.log # UDM keylog
-      pem: free5gc/support/TLS/udm.pem # UDM TLS Certificate
-      key: free5gc/support/TLS/udm.key # UDM TLS Private key
+      pem: ./config/TLS/udm.pem # UDM TLS Certificate
+      key: ./config/TLS/udm.key # UDM TLS Private key
   nrfUri: http://{{ .NrfIPAddress }}:8000 # a valid URI of NRF
 
   # test data set from TS33501-f60 Annex C.4

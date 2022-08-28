@@ -21,8 +21,8 @@ configuration:
     bindingIPv4: 0.0.0.0  # IP used to bind the service
     port: 8000 # Port used to bind the service
     tls: # the local path of TLS key
-      key: free5gc/support/TLS/smf.key # SMF TLS Certificate
-      pem: free5gc/support/TLS/smf.pem # SMF TLS Private key
+      key: ./config/TLS/smf.key # SMF TLS Certificate
+      pem: ./config/TLS/smf.pem # SMF TLS Private key
   serviceNameList: # the SBI services provided by this SMF, refer to TS 29.502
     - nsmf-pdusession # Nsmf_PDUSession service
     - nsmf-event-exposure # Nsmf_EventExposure service
@@ -49,16 +49,16 @@ configuration:
     addr: {{ .Name }}-sbi
   ulcl: true
 {{- if .Nodes }}
-  userplane_information: # list of userplane information
-    up_nodes: # information of userplane node (AN or UPF)
+  userplaneInformation: # list of userplane information
+    upNodes: # information of userplane node (AN or UPF)
 {{- range .Nodes }}
       {{ .Name }}:
         type: {{ .Type }}
 {{- if .AnIp }}
-        an_ip: {{ .AnIp }}
+        anIp: {{ .AnIp }}
 {{- end}}
 {{- if eq .Type "UPF" }}
-        node_id: {{ .NodeIdSbi }} # the IP/FQDN of N4 interface on this UPF (PFCP)
+        nodeId: {{ .NodeIdSbi }} # the IP/FQDN of N4 interface on this UPF (PFCP)
         sNssaiUpfInfos: # S-NSSAI information list for this UPF
           - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
               sst: {{ .Sst }} # Slice/Service Type (uinteger, range: 0~255)

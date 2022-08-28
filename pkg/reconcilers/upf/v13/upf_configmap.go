@@ -32,6 +32,11 @@ const UpfConfig = `info:
 configuration:
   # debugLevel: panic|fatal|error|warn|info|debug|trace
   debugLevel: debug
+  ReportCaller: false
+
+  # packetBufferHoldTime should be longer than Paging retry-out time of AMF.
+  # unit: seconds
+  packetBufferHoldTime: 30
 
   pfcp:
     - addr: {{ .Name }}-sbi

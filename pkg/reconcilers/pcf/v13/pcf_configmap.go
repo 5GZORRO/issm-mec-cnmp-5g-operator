@@ -26,7 +26,7 @@ import (
 )
 
 const PcfConfig = `info:
-  version: 1.0.0
+  version: 1.0.1
   description: PCF initial local configuration
 
 configuration:
@@ -36,6 +36,9 @@ configuration:
     registerIPv4: {{ .Name }}-sbi # IP used to register to NRF
     bindingIPv4: {{ .Name }}-sbi  # IP used to bind the service
     port: 8000              # port used to bind the service
+    tls: # the local path of TLS key
+      pem: ./config/TLS/pcf.pem # PCF TLS Certificate
+      key: ./config/TLS/pcf.key # PCF TLS Private key
   timeFormat: 2019-01-02 15:04:05 # time format of this PCF
   defaultBdtRefId: BdtPolicyId-   # BDT Reference ID, indicating transfer policies of background data transfer.
   nrfUri: http://{{ .NrfIPAddress }}:{{ .NrfPort }}  # a valid URI of NRF
@@ -51,7 +54,7 @@ configuration:
   mongodb:       # the mongodb connected by this PCF
     name: free5gc                  # name of the mongodb
     url: mongodb://{{ .MongoIPAddress }}:27017 # a valid URL of the mongodb
-
+  locality: area1
 # the kind of log output
   # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
   # ReportCaller: enable the caller report or not, value: true or false

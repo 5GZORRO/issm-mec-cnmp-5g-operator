@@ -26,7 +26,7 @@ import (
 )
 
 const NssfConfig = `info:
-  version: 1.0.0
+  version: 1.0.1
   description: NSSF initial local configuration
 
 configuration:
@@ -36,6 +36,9 @@ configuration:
     registerIPv4: {{ .Name }}-sbi # IP used to register to NRF
     bindingIPv4: {{ .Name }}-sbi  # IP used to bind the service
     port: 8000 # Port used to bind the service
+    tls: # the local path of TLS key
+      pem: ./config/TLS/nssf.pem # NSSF TLS Certificate
+      key: ./config/TLS/nssf.key # NSSF TLS Private key
   serviceNameList: # the SBI services provided by this SMF, refer to TS 29.531
     - nnssf-nsselection # Nnssf_NSSelection service
     - nnssf-nssaiavailability # Nnssf_NSSAIAvailability service

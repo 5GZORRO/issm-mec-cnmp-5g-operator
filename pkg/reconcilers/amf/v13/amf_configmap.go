@@ -26,7 +26,7 @@ import (
 )
 
 const AmfConfig = `info:
-  version: 1.0.2
+  version: 1.0.3
   description: AMF initial local configuration
 
 configuration:
@@ -38,6 +38,9 @@ configuration:
     registerIPv4: {{ .Name }}-sbi # IP used to register to NRF
     bindingIPv4: {{ .Name }}-sbi # IP used to bind the service
     port: 8000 # port used to bind the service
+    tls: # the local path of TLS key
+      pem: ./config/TLS/amf.pem # AMF TLS Certificate
+      key: ./config/TLS/amf.key # AMF TLS Private key
   serviceNameList: # the SBI services provided by this AMF, refer to TS 29.518
     - namf-comm # Namf_Communication service
     - namf-evts # Namf_EventExposure service
@@ -80,6 +83,7 @@ configuration:
   locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
   networkFeatureSupport5GS: # 5gs Network Feature Support IE, refer to TS 24.501
     enable: true # append this IE in Registration accept or not
+    length: 1 # IE content length (uinteger, range: 1~3)
     imsVoPS: 0 # IMS voice over PS session indicator (uinteger, range: 0~1)
     emc: 0 # Emergency service support indicator for 3GPP access (uinteger, range: 0~3)
     emf: 0 # Emergency service fallback indicator for 3GPP access (uinteger, range: 0~3)
@@ -112,6 +116,10 @@ configuration:
     maxRetryTimes: 4 # the max number of retransmission
   # retransmission timer for NAS Notification message
   t3565:
+    enable: true     # true or false
+    expireTime: 6s   # default is 6 seconds
+    maxRetryTimes: 4 # the max number of retransmission
+  t3570:
     enable: true     # true or false
     expireTime: 6s   # default is 6 seconds
     maxRetryTimes: 4 # the max number of retransmission

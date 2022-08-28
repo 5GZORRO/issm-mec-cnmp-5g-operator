@@ -26,7 +26,7 @@ import (
 )
 
 const NrfConfig = `info:
-  version: 1.0.0
+  version: 1.0.1
   description: NRF initial local configuration
 
 configuration:
@@ -37,6 +37,9 @@ configuration:
     bindingIPv4: {{ .Name }}-sbi # IP used to bind the service
     scheme: http # the protocol for sbi (http or https)
     port: 8000 # port used to bind the service
+    tls: # the local path of TLS key
+      pem: ./config/TLS/nrf.pem # NRF TLS Certificate
+      key: ./config/TLS/nrf.key # NRF TLS Private key
   DefaultPlmnId:
     mcc: {{ .Mcc }} # Mobile Country Code (3 digits string, digit: 0~9)
     mnc: {{ .Mnc }} # Mobile Network Code (2 or 3 digits string, digit: 0~9)
