@@ -3,7 +3,7 @@
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 NAMESPACE=${1:-5g-test}
-URL=${2:-http://127.0.0.1:38000}
+URL=${2:-http://127.0.0.1:31527}
 
 kubectl create namespace $NAMESPACE
 
