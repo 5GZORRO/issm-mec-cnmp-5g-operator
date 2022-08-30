@@ -122,7 +122,7 @@ func webconsoleContainer(cr *fivegv1alpha1.Webconsole) *corev1.Container {
 		Image:                    cr.Spec.Config.ImageUrl,
 		ImagePullPolicy:          corev1.PullAlways,
 		Env:                      []corev1.EnvVar{},
-		Command:                  []string{"./webui"},
+		Command:                  []string{"./webui", "-c", "/free5gc/config/webuicfg.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		VolumeMounts: []corev1.VolumeMount{

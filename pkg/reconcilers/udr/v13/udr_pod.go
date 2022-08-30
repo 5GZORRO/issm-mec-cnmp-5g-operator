@@ -122,7 +122,7 @@ func udrContainer(cr *fivegv1alpha1.Udr) *corev1.Container {
 		Image:                    cr.Spec.Config.ImageUrl,
 		ImagePullPolicy:          corev1.PullAlways,
 		Env:                      []corev1.EnvVar{},
-		Command:                  []string{"/free5gc/udr/udr", "-udrcfg", "/free5gc/config/udr.yaml"},
+		Command:                  []string{"/free5gc/udr", "-c", "/free5gc/config/udr.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		VolumeMounts: []corev1.VolumeMount{

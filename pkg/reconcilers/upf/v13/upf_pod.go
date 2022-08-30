@@ -137,7 +137,7 @@ func upfContainer(cr *fivegv1alpha1.Upf) *corev1.Container {
 		Image:           cr.Spec.Config.ImageUrl,
 		ImagePullPolicy: corev1.PullAlways,
 		Env:             []corev1.EnvVar{},
-		Command:         []string{"/free5gc/free5gc-upfd/free5gc-upfd", "-f", "/free5gc/config/upf.yaml"},
+		Command:         []string{"/free5gc/free5gc-upfd", "-c", "/free5gc/config/upf.yaml"},
 		//Command: []string{"/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"},
 		SecurityContext: &corev1.SecurityContext{
 			Capabilities: &corev1.Capabilities{

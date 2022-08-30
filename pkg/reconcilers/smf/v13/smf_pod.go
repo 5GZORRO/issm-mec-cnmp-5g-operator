@@ -116,7 +116,7 @@ func smfContainer(cr *fivegv1alpha1.Smf) *corev1.Container {
 		ImagePullPolicy: corev1.PullAlways,
 		Env:             []corev1.EnvVar{},
 		//Command:         []string{"/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"},
-		Command:                  []string{"/free5gc/smf/smf", "--smfcfg", "/free5gc/config/smf.yaml", "--uerouting", "/free5gc/config/uerouting.yaml"},
+		Command:                  []string{"/free5gc/smf", "-c", "/free5gc/config/smf.yaml", "-u", "/free5gc/config/uerouting.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		VolumeMounts: []corev1.VolumeMount{

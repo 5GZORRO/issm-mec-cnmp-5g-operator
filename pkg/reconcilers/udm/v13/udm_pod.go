@@ -123,7 +123,7 @@ func udmContainer(cr *fivegv1alpha1.Udm) *corev1.Container {
 		ImagePullPolicy: corev1.PullAlways,
 		Env:             []corev1.EnvVar{},
 		//Command:         []string{"/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"},
-		Command:                  []string{"/free5gc/udm/udm", "-udmcfg", "/free5gc/config/udm.yaml"},
+		Command:                  []string{"/free5gc/udm", "-c", "/free5gc/config/udm.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		VolumeMounts: []corev1.VolumeMount{

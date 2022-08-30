@@ -35,9 +35,9 @@ configuration:
    registerIPv4: {{ .Name }}-sbi # IP used to register to NRF
    bindingIPv4: {{ .Name }}-sbi  # IP used to bind the service
    port: 8000 # port used to bind the service
-    tls: # the local path of TLS key
-      pem: ./config/TLS/udr.pem # UDR TLS Certificate
-      key: ./config/TLS/udr.key # UDR TLS Private key
+   tls: # the local path of TLS key
+     pem: ./config/TLS/udr.pem # UDR TLS Certificate
+     key: ./config/TLS/udr.key # UDR TLS Private key
  mongodb:
    name: free5gc # Database name in MongoDB
    url: mongodb://{{ .MongoIPAddress }}:27017 # URL of MongoDB

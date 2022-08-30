@@ -123,7 +123,7 @@ func ausfContainer(cr *fivegv1alpha1.Ausf) *corev1.Container {
 		Image:                    cr.Spec.Config.ImageUrl,
 		ImagePullPolicy:          corev1.PullAlways,
 		Env:                      []corev1.EnvVar{},
-		Command:                  []string{"/free5gc/ausf/ausf", "-ausfcfg", "/free5gc/config/ausf.yaml"},
+		Command:                  []string{"/free5gc/ausf", "-c", "/free5gc/config/ausf.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		VolumeMounts: []corev1.VolumeMount{

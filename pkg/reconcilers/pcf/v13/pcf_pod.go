@@ -124,7 +124,7 @@ func pcfContainer(cr *fivegv1alpha1.Pcf) *corev1.Container {
 		Image:                    cr.Spec.Config.ImageUrl,
 		ImagePullPolicy:          corev1.PullAlways,
 		Env:                      []corev1.EnvVar{},
-		Command:                  []string{"/free5gc/pcf/pcf", "-pcfcfg", "/free5gc/config/pcf.yaml"},
+		Command:                  []string{"/free5gc/pcf", "-c", "/free5gc/config/pcf.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		VolumeMounts: []corev1.VolumeMount{

@@ -124,7 +124,7 @@ func nrfContainer(cr *fivegv1alpha1.Nrf) *corev1.Container {
 		ImagePullPolicy: corev1.PullAlways,
 		Env:             []corev1.EnvVar{},
 		//Command:         []string{"/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"},
-		Command:                  []string{"/free5gc/nrf/nrf", "-nrfcfg", "/free5gc/config/nrf.yaml"},
+		Command:                  []string{"/free5gc/nrf", "-c", "/free5gc/config/nrf.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		VolumeMounts: []corev1.VolumeMount{

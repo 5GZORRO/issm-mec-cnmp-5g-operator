@@ -123,7 +123,7 @@ func nssfContainer(cr *fivegv1alpha1.Nssf) *corev1.Container {
 		Image:                    cr.Spec.Config.ImageUrl,
 		ImagePullPolicy:          corev1.PullAlways,
 		Env:                      []corev1.EnvVar{},
-		Command:                  []string{"/free5gc/nssf/nssf", "-nssfcfg", "/free5gc/config/nssf.yaml"},
+		Command:                  []string{"/free5gc/nssf", "-c", "/free5gc/config/nssf.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		VolumeMounts: []corev1.VolumeMount{

@@ -123,7 +123,7 @@ func amfContainer(cr *fivegv1alpha1.Amf) *corev1.Container {
 		ImagePullPolicy: corev1.PullAlways,
 		Env:             []corev1.EnvVar{},
 		//Command:         []string{"/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"},
-		Command:                  []string{"/free5gc/amf/amf", "-amfcfg", "/free5gc/config/amf.yaml"},
+		Command:                  []string{"/free5gc/amf", "-c", "/free5gc/config/amf.yaml"},
 		TerminationMessagePath:   "/dev/termination-log",
 		TerminationMessagePolicy: "File",
 		// TODO: remove 2nd mount
