@@ -4,7 +4,7 @@ metadata:
   name: amf-sample
 spec:
   config:
-    image: 172.15.0.167:5000/weit/free5gc-amf:2443f63
+    image: 172.15.0.167:5000/weit/free5gc-amf:2443f63-tls
     image_init: 172.15.0.167:5000/weit/5ginitcontainer
     amf_name: amf-sample
     nrf_ip_address: "nrf-sample-sbi"

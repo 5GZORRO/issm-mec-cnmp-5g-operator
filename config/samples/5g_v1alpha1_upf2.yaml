@@ -4,7 +4,7 @@ metadata:
   name: upf2-sample
 spec:
   config:
-    image: 172.15.0.167:5000/weit/free5gc-upf-tools:v3.1.1
+    image: 172.15.0.167:5000/weit/free5gc-upf:v3.1.1-tls
     image_init: 172.15.0.167:5000/weit/5ginitcontainer
     upf_name: upf2-sample
     data_network_name: gilan

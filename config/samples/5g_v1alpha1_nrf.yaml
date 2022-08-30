@@ -12,7 +12,7 @@ spec:
         limits:
           memory: "200Mi"
           cpu: "0.2"
-    image: 172.15.0.167:5000/weit/free5gc-nrf:v3.1.1
+    image: 172.15.0.167:5000/weit/free5gc-nrf:v3.1.1-tls
     image_init: 172.15.0.167:5000/weit/5ginitcontainer
     # TODO: nrf_name assumed same value as name
     nrf_name: nrf-sample
