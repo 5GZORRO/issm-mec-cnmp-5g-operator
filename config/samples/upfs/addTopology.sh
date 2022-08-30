@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL=${1:-http://127.0.0.1:38080}
+URL=${1:-http://127.0.0.1:32488}
 
 curl -X POST \
   $URL/ue-routes/red
