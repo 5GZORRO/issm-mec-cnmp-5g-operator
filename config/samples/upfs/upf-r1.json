@@ -1,8 +1,8 @@
 {
-    "up_nodes": {
+    "upNodes": {
         "upf-r1-sample": {
             "type": "UPF",
-            "node_id": "upf-r1-sample-sbi",
+            "nodeId": "upf-r1-sample-sbi",
             "sNssaiUpfInfos": [
               {
                   "sNssai": {"sst": 1, "sd": "010203"},

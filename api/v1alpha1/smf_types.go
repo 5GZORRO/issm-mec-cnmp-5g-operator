@@ -28,7 +28,7 @@ type UpNode struct {
 	Name   string `json:"name,omitempty"`
 	Type   string `json:"type,omitempty"`
 	AnIp   string `json:"an_ip,omitempty"`
-	nrCellId string `json:"nrCellId,omitempty"`
+	NrCellId string `json:"nrCellId,omitempty"`
 	NodeId string `json:"node_id,omitempty"`
 	NodeIdUp string `json:"node_id_up,omitempty"`
 	NodeIdSbi string `json:"node_id_sbi,omitempty"`

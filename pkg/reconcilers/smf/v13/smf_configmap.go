@@ -57,8 +57,8 @@ configuration:
 {{- if .AnIp }}
         anIp: {{ .AnIp }}
 {{- end}}
-{{- if .AnIp }}
-        nrCellId: {{ .nrCellId }}
+{{- if .NrCellId }}
+        nrCellId: {{ .NrCellId }}
 {{- end}}
 {{- if eq .Type "UPF" }}
         nodeId: {{ .NodeIdSbi }} # the IP/FQDN of N4 interface on this UPF (PFCP)
