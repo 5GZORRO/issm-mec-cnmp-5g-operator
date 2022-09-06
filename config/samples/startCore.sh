@@ -53,3 +53,7 @@ kubectl apply -f ./5g_v1alpha1_smf.yaml -n $NAMESPACE
 sleep $BETWEEN
 
 kubectl apply -f ./5g_v1alpha1_webconsole.yaml -n $NAMESPACE
+
+sleep $BETWEEN
+
+curl -X POST http://127.0.0.1:30050/api/subscriber/imsi-208930000000003/20893 -H "Token: admin" -d @sub.json
