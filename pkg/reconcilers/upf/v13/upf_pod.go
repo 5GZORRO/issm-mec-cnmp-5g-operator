@@ -32,7 +32,7 @@ func UpfPod(cr *fivegv1alpha1.Upf) *corev1.Pod {
 		// TODO: write this better
 		anotations = map[string]string{
 			// Note: important for network names to be consistent with configmap
-			"k8s.v1.cni.cncf.io/networks": fmt.Sprintf("[{\"name\" : \"sbi\"}, {\"name\" : \"up\"}, {\"name\" : \"gilan\"}]"),}
+			"k8s.v1.cni.cncf.io/networks": fmt.Sprintf("[{\"name\" : \"sbi\"}, {\"name\" : \"up\"}, {\"name\" : \"%s\"}]", cr.Spec.Config.DataNetworkName),}
 	} else {
 		anotations = map[string]string{
 			"k8s.v1.cni.cncf.io/networks": fmt.Sprintf("[{\"name\" : \"sbi\"}, {\"name\" : \"up\"}]"),}
